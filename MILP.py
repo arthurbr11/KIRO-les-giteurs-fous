@@ -14,6 +14,8 @@ T = [model.add_var(var_type=INTEGER) for j in J]  # Liste des Tj
 V = [model.add_var(var_type=INTEGER) for j in J]  # Liste des Vj
 U = [model.add_var(var_type=INTEGER) for j in J]  # Liste des Uj
 
+model.objective = minimize(w[j] * (C[j] + alpha * U[j] + beta * T[j] for j in range(J)))
+
 for i in range(0, I):
     model += B[i] >= 0
 
@@ -41,35 +43,26 @@ for i in range(0, I):
 
 C = [B[i] + p[i] for i in I]
 
-
-BJ = [S[j][0] for j in J]  #Liste de temps de début des jobs
-CJ = [S[j][-1] for j in J] #Liste de temps de fin des jobs
+BJ = [S[j][0] for j in J]  # Liste de temps de début des jobs
+CJ = [S[j][-1] for j in J]  # Liste de temps de fin des jobs
 
 for j in J:
-    model += BJ[j]>=r[j]
+    model += BJ[j] >= r[j]
 
 for j in J:
     for h in range(1, len(S[j])):
-        model += B[S[h]]-C[S[h-1]] >= 0
+        model += B[S[h]] - C[S[h - 1]] >= 0
 
 for j in J:
     model += T[j] >= 0
     model += T[j] - C[j] + d[j] >= 0
 
 for j in J:
-    model += V[j]-C[j]+d[j] >= 0
+    model += V[j] - C[j] + d[j] >= 0
     model += V[j] + C[j] - d[j] >= 0
     model += U[j] >= 0
-    model += U[j] >=C[j]-d[j]+1-V[j] >=0
+    model += U[j] >= C[j] - d[j] + 1 - V[j] >= 0
 
-
-
-
-
-
-
-
-model.objective = minimize(xsum(p[i] * B[i] for i in I))
 
 m.optimize()
 
