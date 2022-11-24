@@ -1,5 +1,4 @@
 import json
-from pprint import pprint
 
 
 def read_json(path):
@@ -13,6 +12,4 @@ def create_json(dico, name_field):
     return
 
 
-"""data = read_json('Instances/KIRO-tiny.json')
-pprint(data)
-create_json(data, 'new_field')"""
+
