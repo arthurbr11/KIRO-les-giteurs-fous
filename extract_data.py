@@ -32,7 +32,7 @@ def return_all_parameters(path):
     for i in range(I):
         p.append(brut_data['tasks'][i]['processing_time'])
         Mi=[]
-        Oi=[None]*M
+        Oi=[[]]*M
         for m in range(len(brut_data['tasks'][i]['machines'])):
             index_machines=brut_data['tasks'][i]['machines'][m]['machine']
             Mi.append(index_machines-1)
