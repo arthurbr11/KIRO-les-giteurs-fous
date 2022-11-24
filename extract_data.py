@@ -35,7 +35,7 @@ def return_all_parameters(path):
         Oi=[None]*M
         for m in range(len(brut_data['tasks'][i]['machines'])):
             index_machines=brut_data['tasks'][i]['machines'][m]['machine']
-            Mi.append(index_machines)
+            Mi.append(index_machines-1)
             Oi[index_machines-1]=brut_data['tasks'][i]['machines'][m]['operators']
         O_space.append(Oi)
         M_space.append(Mi)
