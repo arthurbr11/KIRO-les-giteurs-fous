@@ -44,3 +44,4 @@ def return_all_parameters(path):
 
 
 
+return_all_parameters('Instances/tiny.json')
