@@ -1,7 +1,8 @@
 import tools_json
 from pprint import pprint
-def return_all_parameters():
-    brut_data = tools_json.read_json('Instances/tiny.json')
+'Instances/tiny.json'
+def return_all_parameters(path):
+    brut_data = tools_json.read_json(path)
 
     """Instances Parameters"""
 
