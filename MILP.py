@@ -1,8 +1,9 @@
 from mip import Model, minimize, INTEGER, BINARY
 import extract_data
+from tqdm import tqdm
 
 path = 'Instances/KIRO-tiny.json'
-J, I, M, O, alpha, beta, S, r, d, w, p, M_space, O_space = extract_data.return_all_parameters(path)
+J, I, M, O, alpha, beta, S, r, d, w, p, M_space, O_space_3d, O_space_2d = extract_data.return_all_parameters(path)
 
 THETA, Km, Ko = sum(p[i] for i in range(I)) * 5, M + 20, O + 20
 
@@ -33,7 +34,7 @@ for i in range(I):
         model += xim[i][m] - M_space[i][m] <= 0  # mi in Mi
         model += sum(ximo[i][m][o] for o in range(O)) - xim[i][m] == 0  # mi is the machine for o
         for o in range(O):
-            model += ximo[i][m][o] + O_space[i][m][o] <= 0  # o in Oi,m
+            model += ximo[i][m][o] + O_space_3d[i][m][o] <= 0  # o in Oi,m
 
 for i in range(I):
     model += Ci[i] == Bi[i] + p[i]  # 2
@@ -57,7 +58,7 @@ for j in range(J):
 for j in range(J):
     model += Uj[j]*THETA >= Tj[j]  # 8
 
-for i1 in range(I):
+for i1 in tqdm(range(I)):
     for i2 in range(I):
         if i1 != i2:
             model += fii[i1][i2] >= (deltaii[i1][i2] + epsilonii[i1][i2])/(Km+Ko)  # 11
@@ -81,8 +82,6 @@ for i1 in range(I):
 
 model.objective = minimize(sum(w[j] * (Cj[j] + alpha * Uj[j] + beta * Tj[j]) for j in range(J))+sum(deltaii[i1][i2]+epsilonii[i1][i2]+hii[i1][i2]+gii[i1][i2]+fii[i1][i2] if (i1 != i2) else 0 for i1 in range(I) for i2 in range(I)))
 
-
 model.optimize()
 
-#####################################################
 

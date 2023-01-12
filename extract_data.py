@@ -50,7 +50,7 @@ def return_all_parameters(path):
             Oi.append(Oim)
         O_space_3d.append(Oi)
 
-    return (J,I,M,O,alpha,beta,S,r,d,w,p,M_space,O_space_3d)
+    return (J,I,M,O,alpha,beta,S,r,d,w,p,M_space,O_space_3d,O_space_2d)
 
 
 
