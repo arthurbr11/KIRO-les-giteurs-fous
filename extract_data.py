@@ -1,6 +1,6 @@
 import tools_json
 from pprint import pprint
-'Instances/tiny.json'
+'Instances/KIRO-tiny.json'
 def return_all_parameters(path):
     brut_data = tools_json.read_json(path)
 
@@ -28,20 +28,30 @@ def return_all_parameters(path):
     """ Tasks i parameters and machines m in M_spaces[i] parameters"""
     p = []
     M_space = []
-    O_space=[]#Oim=O[i][m]
+    O_space_2d=[]#Oim=O[i][m]
     for i in range(I):
         p.append(brut_data['tasks'][i]['processing_time'])
-        Mi=[]
+        Mi=[0]*M
         Oi=[[]]*M
         for m in range(len(brut_data['tasks'][i]['machines'])):
             index_machines=brut_data['tasks'][i]['machines'][m]['machine']
-            Mi.append(index_machines-1)
+            Mi[index_machines-1]=1
             Oi[index_machines-1]=brut_data['tasks'][i]['machines'][m]['operators']
-        O_space.append(Oi)
+        O_space_2d.append(Oi)
         M_space.append(Mi)
+    O_space_3d=[]
+    for i in range(I):
+        Oi=[]
+        for m in range(M):
+            Oim=[0]*O
+            for o in range(O):
+                if o+1 in O_space_2d[i][m]:
+                    Oim[o]=1
+            Oi.append(Oim)
+        O_space_3d.append(Oi)
 
-    return (J,I,M,O,alpha,beta,S,r,d,w,p,M_space,O_space)
+    return (J,I,M,O,alpha,beta,S,r,d,w,p,M_space,O_space_3d)
 
 
 
-return_all_parameters('Instances/tiny.json')
+return_all_parameters('Instances/KIRO-tiny.json')
