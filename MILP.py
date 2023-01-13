@@ -40,17 +40,17 @@ for i in range(I):
     model += Ci[i] == Bi[i] + p[i]  # 2
 
 for j in range(J):
-    model += Bj[j] == Bi[S[j][0]-1]  # 3
+    model += Bj[j] == Bi[S[j][0]]  # 3
 
 for j in range(J):
-    model += Cj[j] == Ci[S[j][-1]-1]  # 4
+    model += Cj[j] == Ci[S[j][-1]]  # 4
 
 for j in range(J):
     model += Bj[j] >= r[j]  # 5
 
 for j in range(J):
     for k in range(1, len(S[j])):
-        model += Bi[S[j][k]-1] == Ci[S[j][k - 1]-1]  # 6
+        model += Bi[S[j][k]] == Ci[S[j][k - 1]]  # 6
 
 for j in range(J):
     model += Tj[j] >= Cj[j] - d[j]  # 7

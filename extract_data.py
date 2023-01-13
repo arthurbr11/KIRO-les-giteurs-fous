@@ -1,4 +1,6 @@
 import tools_json
+import numpy as np
+
 from pprint import pprint
 'Instances/KIRO-tiny.json'
 def return_all_parameters(path):
@@ -24,6 +26,9 @@ def return_all_parameters(path):
         r.append(brut_data['jobs'][j]['release_date'])
         d.append(brut_data['jobs'][j]['due_date'])
         w.append(brut_data['jobs'][j]['weight'])
+    for k in range(len(S)):
+        for l in range(len(S[k])):
+            S[k][l]-=1
 
     """ Tasks i parameters and machines m in M_spaces[i] parameters"""
     p = []
@@ -37,6 +42,8 @@ def return_all_parameters(path):
             index_machines=brut_data['tasks'][i]['machines'][m]['machine']
             Mi[index_machines-1]=1
             Oi[index_machines-1]=brut_data['tasks'][i]['machines'][m]['operators']
+            for k in range(len(Oi[index_machines-1])):
+                Oi[index_machines-1][k]-=1
         O_space_2d.append(Oi)
         M_space.append(Mi)
     O_space_3d=[]
@@ -45,7 +52,7 @@ def return_all_parameters(path):
         for m in range(M):
             Oim=[0]*O
             for o in range(O):
-                if o+1 in O_space_2d[i][m]:
+                if o in O_space_2d[i][m]:
                     Oim[o]=1
             Oi.append(Oim)
         O_space_3d.append(Oi)
