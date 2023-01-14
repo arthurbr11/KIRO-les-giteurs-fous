@@ -129,14 +129,14 @@ tools_json.solution_create_field(sol_tiny, 'Instances/KIRO-tiny.json')
 
 sol_small = create_solution_glouton('Instances/KIRO-small.json')
 print(analysis_sol.is_feasible(sol_small,analysis_sol.read_instance('Instances/KIRO-small.json')))
-tools_json.solution_create_field(sol_tiny, 'Instances/KIRO-small.json')
+tools_json.solution_create_field(sol_small, 'Instances/KIRO-small.json')
 
 sol_medium = create_solution_glouton('Instances/KIRO-medium.json')
 print(analysis_sol.is_feasible(sol_medium,analysis_sol.read_instance('Instances/KIRO-medium.json')))
-tools_json.solution_create_field(sol_tiny, 'Instances/KIRO-medium.json')
+tools_json.solution_create_field(sol_medium, 'Instances/KIRO-medium.json')
 
 sol_large = create_solution_glouton('Instances/KIRO-large.json')
 print(analysis_sol.is_feasible(sol_large,analysis_sol.read_instance('Instances/KIRO-large.json')))
-tools_json.solution_create_field(sol_tiny, 'Instances/KIRO-large.json')
+tools_json.solution_create_field(sol_large, 'Instances/KIRO-large.json')
 
 
