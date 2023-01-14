@@ -8,8 +8,8 @@ import tools_json
 import analysis_sol
 
 
-def not_intersect(creneau, List_creneau_taken):
-    for c in List_creneau_taken:
+def not_intersect(creneau, list_creneau_taken):
+    for c in list_creneau_taken:
         if c[0] <= creneau[0] <= c[1] or c[0] <= creneau[1] <= c[1]:
             return False
     return True
@@ -25,49 +25,49 @@ def operator_machine_for_task(i, O_space_2d):
 
 
 def start_for_task(o, m, i, r, Mtm, Oto, p):
-    List_creneau_taken_for_m = Mtm[m].copy()
-    List_creneau_taken_for_o = Oto[o].copy()
+    list_creneau_taken_for_m = Mtm[m].copy()
+    list_creneau_taken_for_o = Oto[o].copy()
 
-    if len(List_creneau_taken_for_m) == 0:
-        if len(List_creneau_taken_for_o) == 0:
+    if len(list_creneau_taken_for_m) == 0:
+        if len(list_creneau_taken_for_o) == 0:
             return r + 1
         else:
-            if r + p[i] < List_creneau_taken_for_o[0][0]:  # cdt bord debut
+            if r + p[i] < list_creneau_taken_for_o[0][0]:  # cdt bord debut
                 return r + 1
-            if r >= List_creneau_taken_for_o[-1][1]:  # cdt bord fin
+            if r >= list_creneau_taken_for_o[-1][1]:  # cdt bord fin
                 return r + 1
             start = r
-            for k in range(1, len(List_creneau_taken_for_o)):
-                if start + p[i] < List_creneau_taken_for_o[k][0] and start > List_creneau_taken_for_o[k - 1][1]:
+            for k in range(1, len(list_creneau_taken_for_o)):
+                if start + p[i] < list_creneau_taken_for_o[k][0] and start > list_creneau_taken_for_o[k - 1][1]:
                     return start
-                start = max(List_creneau_taken_for_o[k][1] + 1, start)
-            return max(start, List_creneau_taken_for_o[-1][1] + 1)
+                start = max(list_creneau_taken_for_o[k][1] + 1, start)
+            return max(start, list_creneau_taken_for_o[-1][1] + 1)
     else:
-        if len(List_creneau_taken_for_o) == 0:
-            if r + p[i] < List_creneau_taken_for_m[0][0]:  # cdt bord debut
+        if len(list_creneau_taken_for_o) == 0:
+            if r + p[i] < list_creneau_taken_for_m[0][0]:  # cdt bord debut
                 return r + 1
-            if r >= List_creneau_taken_for_m[-1][1]:  # cdt bord fin
+            if r >= list_creneau_taken_for_m[-1][1]:  # cdt bord fin
                 return r + 1
             start = r
-            for k in range(1, len(List_creneau_taken_for_m)):
-                if start + p[i] < List_creneau_taken_for_m[k][0] and start > List_creneau_taken_for_m[k - 1][1]:
+            for k in range(1, len(list_creneau_taken_for_m)):
+                if start + p[i] < list_creneau_taken_for_m[k][0] and start > list_creneau_taken_for_m[k - 1][1]:
                     return start
-                start = max(List_creneau_taken_for_m[k][1] + 1, start)
-            return max(start, List_creneau_taken_for_m[-1][1] + 1)
+                start = max(list_creneau_taken_for_m[k][1] + 1, start)
+            return max(start, list_creneau_taken_for_m[-1][1] + 1)
         else:
-            if r + p[i] < List_creneau_taken_for_m[0][0] and not_intersect([r, r + p[i]],
-                                                                           List_creneau_taken_for_o):  # cdt bord debut
+            if r + p[i] < list_creneau_taken_for_m[0][0] and not_intersect([r, r + p[i]],
+                                                                           list_creneau_taken_for_o):  # cdt bord debut
                 return r + 1
-            if r >= List_creneau_taken_for_m[-1][1] and not_intersect([r, r + p[i]],
-                                                                      List_creneau_taken_for_o):  # cdt bord fin
+            if r >= list_creneau_taken_for_m[-1][1] and not_intersect([r, r + p[i]],
+                                                                      list_creneau_taken_for_o):  # cdt bord fin
                 return r + 1
             start = r
-            for k in range(1, len(List_creneau_taken_for_m)):
-                if start + p[i] < List_creneau_taken_for_m[k][0] and start > List_creneau_taken_for_m[k - 1][1]:
-                    if not_intersect([start, start + p[i]], List_creneau_taken_for_o):
+            for k in range(1, len(list_creneau_taken_for_m)):
+                if start + p[i] < list_creneau_taken_for_m[k][0] and start > list_creneau_taken_for_m[k - 1][1]:
+                    if not_intersect([start, start + p[i]], list_creneau_taken_for_o):
                         return start
-                start = max(List_creneau_taken_for_m[k][1] + 1, start)
-            return max(start, List_creneau_taken_for_o[-1][1] + 1, List_creneau_taken_for_m[-1][1] + 1)
+                start = max(list_creneau_taken_for_m[k][1] + 1, start)
+            return max(start, list_creneau_taken_for_o[-1][1] + 1, list_creneau_taken_for_m[-1][1] + 1)
 
 
 def create_solution_glouton(type_data, Sort_S=None, Sort_r=None):
@@ -127,14 +127,14 @@ def create_solution_glouton(type_data, Sort_S=None, Sort_r=None):
     return analysis_sol.Solution(Bi, Mi, Oi)
 
 
-Space_instance = {'tiny': analysis_sol.read_instance('Instances/KIRO-tiny.json'),
+SPACE_INSTANCE = {'tiny': analysis_sol.read_instance('Instances/KIRO-tiny.json'),
                   'small': analysis_sol.read_instance('Instances/KIRO-small.json'),
                   'medium': analysis_sol.read_instance('Instances/KIRO-medium.json'),
                   'large': analysis_sol.read_instance('Instances/KIRO-large.json')}
-Space_sol_glouton = {'tiny': create_solution_glouton('tiny'),
+SPACE_SOL_GLOUTON = {'tiny': create_solution_glouton('tiny'),
                      'small': create_solution_glouton('small'),
                      'medium': create_solution_glouton('medium'),
                      'large': create_solution_glouton('large')}
 
-Space_cost_glouton = {i:analysis_sol.cost(Space_sol_glouton[i], Space_instance[i]) for i in Space_sol_glouton.keys()}
-cost_glouton = sum(Space_cost_glouton[i] for i in Space_sol_glouton.keys())
+SPACE_COST_GLOUTON = {i: analysis_sol.cost(SPACE_SOL_GLOUTON[i], SPACE_INSTANCE[i]) for i in SPACE_SOL_GLOUTON.keys()}
+COST_GLOUTON = sum(SPACE_COST_GLOUTON[i] for i in SPACE_SOL_GLOUTON.keys())
