@@ -94,8 +94,8 @@ def glouton_random(sol_init, cost_init, itteration, verbose=True):
         if verbose:
             print(
                 f'On est passé de {cost_init[type_data[k]]} a {cost[type_data[k]]} sur {type_data[k]}.')
-    cost_total_init = sum(c for c in sol_init.values())
-    cost_total = sum(c for c in sol.values())
+    cost_total_init = sum(c for c in cost_init.values())
+    cost_total = sum(c for c in cost.values())
 
     if True:  # Verbose normaly
         print(
@@ -114,6 +114,6 @@ if __name__ == "__main__":
     COST_CURRENT = {i: analysis_sol.cost(SOL_CURRENT[i], INSTANCE[i]) for i in SOL_CURRENT.keys()}
     COST_TOTAL_CURRENT = sum(cost for cost in COST_CURRENT.values())
     for _ in tqdm(range(100)):
-        SOL_CURRENT, COST_CURRENT = glouton_random(SOL_CURRENT, COST_CURRENT, 10, verbose=False)
+        SOL_CURRENT, COST_CURRENT = glouton_random(SOL_CURRENT, COST_CURRENT, 100, verbose=False)
 
     COST_TOTAL_CURRENT = sum(cost for cost in COST_CURRENT.values())
