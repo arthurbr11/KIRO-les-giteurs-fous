@@ -146,5 +146,6 @@ print(analysis_sol.is_feasible(sol_large, Space_instance[3]))
 tools_json.solution_create_field(sol_large, 'Instances/KIRO-large-glouton.json')
 
 Space_sol_glouton = [sol_tiny, sol_small, sol_medium, sol_large]
-cost_glouton = sum(analysis_sol.cost(Space_sol_glouton[i], Space_instance[i]) for i in range(4))
+Space_cost_glouton = [analysis_sol.cost(Space_sol_glouton[i], Space_instance[i]) for i in range(4)]
+cost_glouton = sum(Space_cost_glouton)
 print(cost_glouton)
