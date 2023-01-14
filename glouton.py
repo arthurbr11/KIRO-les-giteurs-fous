@@ -83,10 +83,10 @@ def create_solution_glouton(path):
     Sort_r = []
     Data_job = {}
     for j in range(J):
-        Data_job[f'{w[j]}'] = []
+        Data_job[w[j]] = []
     for j in range(J):
-        Data_job[f'{w[j]}'].append([S[j], r[j]])
-    Data_job = collections.OrderedDict(sorted(Data_job.items()))
+        Data_job[w[j]].append([S[j], r[j]])
+    Data_job = collections.OrderedDict(sorted(Data_job.items(),reverse=True))
     for key, values in Data_job.items():
         for k in range(len(values)):
             Sort_S.append(values[k][0])
