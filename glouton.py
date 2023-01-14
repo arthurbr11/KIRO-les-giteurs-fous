@@ -135,11 +135,11 @@ SOL_GLOUTON = {'tiny': create_solution_glouton('tiny'),
                      'small': create_solution_glouton('small'),
                      'medium': create_solution_glouton('medium'),
                      'large': create_solution_glouton('large')}
+type_data = ['tiny', 'small', 'medium', 'large']
 
-"""print(analysis_sol.is_feasible(SPACE_SOL_GLOUTON['tiny'],SPACE_INSTANCE['tiny']))
-print(analysis_sol.is_feasible(SPACE_SOL_GLOUTON['small'],SPACE_INSTANCE['small']))
-print(analysis_sol.is_feasible(SPACE_SOL_GLOUTON['medium'],SPACE_INSTANCE['medium']))
-print(analysis_sol.is_feasible(SPACE_SOL_GLOUTON['large'],SPACE_INSTANCE['large']))"""
+for k in range(4):
+    tools_json.solution_create_field(SOL_GLOUTON[type_data[k]], f'glouton/KIRO-{type_data[k]}')
+    print(analysis_sol.is_feasible(SOL_GLOUTON[type_data[k]],INSTANCE[type_data[k]]))
 
 COST_GLOUTON = {i: analysis_sol.cost(SOL_GLOUTON[i], INSTANCE[i]) for i in SOL_GLOUTON.keys()}
 COST_TOTAL_GLOUTON = sum(COST_GLOUTON[i] for i in SOL_GLOUTON.keys())
