@@ -90,7 +90,7 @@ def glouton_random_space(space_sol, itteration, verbose=True):
     return space
 
 
-if __name__ == 'main':
+if __name__ == "__main__":
     SPACE_SOL = {'tiny': glouton_all_init_tiny_space(),
                  'small': [glouton.SOL_GLOUTON['small']],
                  'medium': [glouton.SOL_GLOUTON['medium']],

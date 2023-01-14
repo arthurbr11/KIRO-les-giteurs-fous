@@ -89,7 +89,7 @@ def glouton_random(sol_init, cost_init, itteration, verbose=True):
         print(
             f'On est passé de {cost_init[type_data[0]]} a {cost[type_data[0]]} sur {type_data[0]}.')
     for k in range(1, 4):
-        sol[type_data[k]], cost[type_data[k]] = Opti_glouton(type_data[k], sol_init, cost_init,itteration)
+        sol[type_data[k]], cost[type_data[k]] = Opti_glouton(type_data[k], sol_init, cost_init, itteration)
         tools_json.solution_create_field(sol[type_data[k]], f'glouton_random/KIRO-{type_data[k]}')
         if verbose:
             print(
@@ -97,22 +97,23 @@ def glouton_random(sol_init, cost_init, itteration, verbose=True):
     cost_total_init = sum(cost_init[i] for i in sol.keys())
     cost_total = sum(cost[i] for i in sol.keys())
 
-    if True:#Verbose normaly
+    if True:  # Verbose normaly
         print(
             f'On est passé de {cost_total_init} a {cost_total} sur le total.')
     return sol, cost
 
-if __name__ == 'main':
+
+if __name__ == "__main__":
     path = ['SOL/glouton_random/KIRO-tiny-sol_11.json', 'SOL/glouton_random/KIRO-small-sol_11.json',
             'SOL/glouton_random/KIRO-medium-sol_11.json', 'SOL/glouton_random/KIRO-large-sol_11.json']
     SOL_CURRENT = {'tiny': analysis_sol.read_solution(path[0]),
-                         'small': analysis_sol.read_solution(path[1]),
-                         'medium': analysis_sol.read_solution(path[2]),
-                         'large': analysis_sol.read_solution(path[3])}
+                   'small': analysis_sol.read_solution(path[1]),
+                   'medium': analysis_sol.read_solution(path[2]),
+                   'large': analysis_sol.read_solution(path[3])}
 
     COST_CURRENT = {i: analysis_sol.cost(SOL_CURRENT[i], INSTANCE[i]) for i in SOL_CURRENT.keys()}
     COST_TOTAL_CURRENT = sum(COST_CURRENT[i] for i in COST_CURRENT.keys())
     for _ in tqdm(range(10)):
-        SOL_CURRENT, COST_CURRENT = glouton_random(SOL_CURRENT, COST_CURRENT, 10,verbose=False)
+        SOL_CURRENT, COST_CURRENT = glouton_random(SOL_CURRENT, COST_CURRENT, 10, verbose=False)
 
     COST_TOTAL_CURRENT = sum(COST_CURRENT[i] for i in COST_CURRENT.keys())
