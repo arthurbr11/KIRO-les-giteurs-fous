@@ -40,8 +40,8 @@ def start_for_task(o, m, i, r, Mtm, Oto, p):
             for k in range(1, len(list_creneau_taken_for_o)):
                 if start + p[i] < list_creneau_taken_for_o[k][0] and start > list_creneau_taken_for_o[k - 1][1]:
                     return start
-                start = max(list_creneau_taken_for_o[k][1] + 1, start)
-            return max(start, list_creneau_taken_for_o[-1][1] + 1)
+                start = max(list_creneau_taken_for_o[k][1], start)
+            return max(start, list_creneau_taken_for_o[-1][1])
     else:
         if len(list_creneau_taken_for_o) == 0:
             if r + p[i] < list_creneau_taken_for_m[0][0]:  # cdt bord debut
@@ -52,8 +52,8 @@ def start_for_task(o, m, i, r, Mtm, Oto, p):
             for k in range(1, len(list_creneau_taken_for_m)):
                 if start + p[i] < list_creneau_taken_for_m[k][0] and start > list_creneau_taken_for_m[k - 1][1]:
                     return start
-                start = max(list_creneau_taken_for_m[k][1] + 1, start)
-            return max(start, list_creneau_taken_for_m[-1][1] + 1)
+                start = max(list_creneau_taken_for_m[k][1], start)
+            return max(start, list_creneau_taken_for_m[-1][1])
         else:
             if r + p[i] < list_creneau_taken_for_m[0][0] and not_intersect([r, r + p[i]],
                                                                            list_creneau_taken_for_o):  # cdt bord debut
@@ -66,8 +66,8 @@ def start_for_task(o, m, i, r, Mtm, Oto, p):
                 if start + p[i] < list_creneau_taken_for_m[k][0] and start > list_creneau_taken_for_m[k - 1][1]:
                     if not_intersect([start, start + p[i]], list_creneau_taken_for_o):
                         return start
-                start = max(list_creneau_taken_for_m[k][1] + 1, start)
-            return max(start, list_creneau_taken_for_o[-1][1] + 1, list_creneau_taken_for_m[-1][1] + 1)
+                start = max(list_creneau_taken_for_m[k][1], start)
+            return max(start, list_creneau_taken_for_o[-1][1], list_creneau_taken_for_m[-1][1])
 
 
 def create_solution_glouton(type_data, Sort_S=None, Sort_r=None):
@@ -127,14 +127,19 @@ def create_solution_glouton(type_data, Sort_S=None, Sort_r=None):
     return analysis_sol.Solution(Bi, Mi, Oi)
 
 
-SPACE_INSTANCE = {'tiny': analysis_sol.read_instance('Instances/KIRO-tiny.json'),
+INSTANCE = {'tiny': analysis_sol.read_instance('Instances/KIRO-tiny.json'),
                   'small': analysis_sol.read_instance('Instances/KIRO-small.json'),
                   'medium': analysis_sol.read_instance('Instances/KIRO-medium.json'),
                   'large': analysis_sol.read_instance('Instances/KIRO-large.json')}
-SPACE_SOL_GLOUTON = {'tiny': create_solution_glouton('tiny'),
+SOL_GLOUTON = {'tiny': create_solution_glouton('tiny'),
                      'small': create_solution_glouton('small'),
                      'medium': create_solution_glouton('medium'),
                      'large': create_solution_glouton('large')}
 
-SPACE_COST_GLOUTON = {i: analysis_sol.cost(SPACE_SOL_GLOUTON[i], SPACE_INSTANCE[i]) for i in SPACE_SOL_GLOUTON.keys()}
-COST_GLOUTON = sum(SPACE_COST_GLOUTON[i] for i in SPACE_SOL_GLOUTON.keys())
+"""print(analysis_sol.is_feasible(SPACE_SOL_GLOUTON['tiny'],SPACE_INSTANCE['tiny']))
+print(analysis_sol.is_feasible(SPACE_SOL_GLOUTON['small'],SPACE_INSTANCE['small']))
+print(analysis_sol.is_feasible(SPACE_SOL_GLOUTON['medium'],SPACE_INSTANCE['medium']))
+print(analysis_sol.is_feasible(SPACE_SOL_GLOUTON['large'],SPACE_INSTANCE['large']))"""
+
+COST_GLOUTON = {i: analysis_sol.cost(SOL_GLOUTON[i], INSTANCE[i]) for i in SOL_GLOUTON.keys()}
+COST_TOTAL_GLOUTON = sum(COST_GLOUTON[i] for i in SOL_GLOUTON.keys())

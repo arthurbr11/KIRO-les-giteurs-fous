@@ -66,6 +66,11 @@ class Solution:
         self.machines = machines
         self.operators = operators
 
+    def __eq__(self, other):
+        if self.starts != other.starts or self.machines != other.machines or self.operators != other.operators:
+            return False
+        return True
+
 
 """
     is_feasible(solution::Solution, instance::Instance; verbose=true)
