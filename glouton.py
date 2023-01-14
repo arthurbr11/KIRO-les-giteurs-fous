@@ -30,12 +30,12 @@ def start_for_task(o, m, i, r, Mtm, Oto, p):
 
     if len(list_creneau_taken_for_m) == 0:
         if len(list_creneau_taken_for_o) == 0:
-            return r + 1
+            return r
         else:
             if r + p[i] < list_creneau_taken_for_o[0][0]:  # cdt bord debut
-                return r + 1
+                return r
             if r >= list_creneau_taken_for_o[-1][1]:  # cdt bord fin
-                return r + 1
+                return r
             start = r
             for k in range(1, len(list_creneau_taken_for_o)):
                 if start + p[i] < list_creneau_taken_for_o[k][0] and start > list_creneau_taken_for_o[k - 1][1]:
@@ -45,9 +45,9 @@ def start_for_task(o, m, i, r, Mtm, Oto, p):
     else:
         if len(list_creneau_taken_for_o) == 0:
             if r + p[i] < list_creneau_taken_for_m[0][0]:  # cdt bord debut
-                return r + 1
+                return r
             if r >= list_creneau_taken_for_m[-1][1]:  # cdt bord fin
-                return r + 1
+                return r
             start = r
             for k in range(1, len(list_creneau_taken_for_m)):
                 if start + p[i] < list_creneau_taken_for_m[k][0] and start > list_creneau_taken_for_m[k - 1][1]:
@@ -57,10 +57,10 @@ def start_for_task(o, m, i, r, Mtm, Oto, p):
         else:
             if r + p[i] < list_creneau_taken_for_m[0][0] and not_intersect([r, r + p[i]],
                                                                            list_creneau_taken_for_o):  # cdt bord debut
-                return r + 1
+                return r
             if r >= list_creneau_taken_for_m[-1][1] and not_intersect([r, r + p[i]],
                                                                       list_creneau_taken_for_o):  # cdt bord fin
-                return r + 1
+                return r
             start = r
             for k in range(1, len(list_creneau_taken_for_m)):
                 if start + p[i] < list_creneau_taken_for_m[k][0] and start > list_creneau_taken_for_m[k - 1][1]:
