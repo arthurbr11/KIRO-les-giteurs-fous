@@ -2,6 +2,7 @@ import numpy as np
 import bisect
 import collections
 import itertools
+from tqdm import tqdm
 
 import extract_data
 import tools_json
@@ -18,63 +19,87 @@ Space_cost = Space_cost_glouton.copy()
 cost = glouton.cost_glouton
 
 
-def glouton_all_init_tiny_small(path):
-    J, I, M, O, alpha, beta, S, r, d, w, p, M_space, O_space_3d, O_space_2d = extract_data.return_all_parameters(path)
+#############################1-heuristic#########################################
+def glouton_all_init_tiny(type_data):
+    J, I, M, O, alpha, beta, S, r, d, w, p, M_space, O_space_3d, O_space_2d = extract_data.return_all_parameters(
+        type_data)
     Jobs_caracteristics = [[S[i], r[i]] for i in range(J)]
     permutations_jobs_caracteristics = list(itertools.permutations(Jobs_caracteristics))
 
-    sol = 0
-    cost = np.infty
-    inst=analysis_sol.read_instance(path)
-    for index_perm,job_caracteristic in enumerate(permutations_jobs_caracteristics):
-        print(index_perm)
-        Bi, Mi, Oi = [-1] * I, [-1] * I, [-1] * I
-
-        Mtm = []
-        for m in range(M):
-            Mtm.append([])
-        Oto = []
-        for o in range(O):
-            Oto.append([])
+    inst = Space_instance[type_data]
+    sol = Space_sol_glouton[type_data]
+    cost = analysis_sol.cost(sol, inst)
+    for index_perm, job_caracteristic in enumerate(permutations_jobs_caracteristics):
 
         Sort_S = [job_caracteristic[j][0] for j in range(J)]
         Sort_r = [job_caracteristic[j][1] for j in range(J)]
 
-        for j in range(J):
-            for k, i in enumerate(Sort_S[j]):
-                possibilities = glouton.operator_machine_for_task(i, O_space_2d)
-                start_date_possibilities = []
-                start = np.inf
-                o_start, m_start = possibilities[0]
-                if k == 0:
-                    for (o, m) in possibilities:
-                        start_date_possibilities.append(glouton.start_for_task(o, m, i, Sort_r[j], Mtm, Oto, p))
-                        if start > start_date_possibilities[-1]:
-                            start = start_date_possibilities[-1]
-                            o_start, m_start = o, m
-                            if start == Sort_r[j]:
-                                break
-                    Bi[i], Oi[i], Mi[i] = start, o_start, m_start
-                    bisect.insort(Mtm[m_start], [start, start + p[i]])
-                    bisect.insort(Oto[o_start], [start, start + p[i]])
-                else:
-                    for (o, m) in possibilities:
-                        start_date_possibilities.append(
-                            glouton.start_for_task(o, m, i, Bi[Sort_S[j][k - 1]] + p[Sort_S[j][k - 1]], Mtm, Oto, p))
-                        if start > start_date_possibilities[-1]:
-                            start = start_date_possibilities[-1]
-                            o_start, m_start = o, m
-                            if start == Sort_r[j]:
-                                break
-                    Bi[i], Oi[i], Mi[i] = start, o_start, m_start
-                    bisect.insort(Mtm[m_start], [start, start + p[i]])
-                    bisect.insort(Oto[o_start], [start, start + p[i]])
-        current_sol = analysis_sol.Solution(Bi, Mi, Oi)
-        if analysis_sol.is_feasible(current_sol,inst) and analysis_sol.cost(current_sol, inst) < cost:
+        current_sol = glouton.create_solution_glouton(type_data, Sort_S, Sort_r)
+        if analysis_sol.is_feasible(current_sol, inst) and analysis_sol.cost(current_sol, inst) < cost:
             sol = current_sol
             cost = analysis_sol.cost(current_sol, inst)
-    return sol
+    return (sol, cost)
 
-sol_small = glouton_all_init_tiny_small('Instances/KIRO-small.json')
-tools_json.solution_create_field(sol_small,'Instances/KIRO-small.json')
+
+type_data = 'tiny'
+Space_sol[type_data], Space_cost[type_data] = glouton_all_init_tiny('tiny')
+tools_json.solution_create_field(Space_sol[type_data], '1-heuristique/KIRO-tiny')
+print(
+    f'Le glouton {Space_cost_glouton[type_data]} et celui qu on fait {analysis_sol.cost(Space_sol[type_data], Space_instance[type_data])} sur {type_data}.')
+
+
+def Opti_glouton(type_data):
+    inst = Space_instance[type_data]
+    sol = Space_sol_glouton[type_data]
+    cost = Space_cost[type_data]
+    J, I, M, O, alpha, beta, S, r, d, w, p, M_space, O_space_3d, O_space_2d = extract_data.return_all_parameters(
+        type_data)
+
+    current_sol = glouton.create_solution_glouton(type_data, S,r)
+    if analysis_sol.is_feasible(current_sol, inst) and analysis_sol.cost(current_sol, inst) < analysis_sol.cost(sol,
+                                                                                                                inst):
+        cost = analysis_sol.cost(current_sol, inst)
+        sol = current_sol
+    Sort_S = []
+    Sort_r = []
+    Data_job = {}
+    for j in range(J):
+        Data_job[w[j]] = []
+    for j in range(J):
+        Data_job[w[j]].append([S[j], r[j]])
+    Data_job = collections.OrderedDict(sorted(Data_job.items(), reverse=False))
+    for key, values in Data_job.items():
+        for k in range(len(values)):
+            Sort_S.append(values[k][0])
+            Sort_r.append(values[k][1])
+    current_sol = glouton.create_solution_glouton(type_data, Sort_S,Sort_r)
+    if analysis_sol.is_feasible(current_sol, inst) and analysis_sol.cost(current_sol, inst) < analysis_sol.cost(sol,
+                                                                                                                inst):
+        cost = analysis_sol.cost(current_sol, inst)
+        sol = current_sol
+    return (sol, cost)
+
+
+type_data = 'small'
+Space_sol[type_data], Space_cost[type_data] = Opti_glouton(type_data)
+tools_json.solution_create_field(Space_sol[type_data], '1-heuristique/KIRO-small')
+print(
+    f'Le glouton {Space_cost_glouton[type_data]} et celui qu on fait {analysis_sol.cost(Space_sol[type_data], Space_instance[type_data])} sur {type_data}.')
+
+type_data = 'medium'
+Space_sol[type_data], Space_cost[type_data] = Opti_glouton(type_data)
+tools_json.solution_create_field(Space_sol[type_data], '1-heuristique/KIRO-medium')
+print(
+    f'Le glouton {Space_cost_glouton[type_data]} et celui qu on fait {analysis_sol.cost(Space_sol[type_data], Space_instance[type_data])} sur {type_data}.')
+
+type_data = 'large'
+Space_sol[type_data], Space_cost[type_data] = Opti_glouton(type_data)
+tools_json.solution_create_field(Space_sol[type_data], '1-heuristique/KIRO-large')
+print(
+    f'Le glouton {Space_cost_glouton[type_data]} et celui qu on fait {analysis_sol.cost(Space_sol[type_data], Space_instance[type_data])} sur {type_data}.')
+
+cost = sum(Space_cost[i] for i in Space_sol.keys())
+print(
+    f'Le glouton {cost_glouton} et celui qu on fait {cost} sur le total.')
+
 

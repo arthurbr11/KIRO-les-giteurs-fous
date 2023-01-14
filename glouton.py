@@ -70,8 +70,9 @@ def start_for_task(o, m, i, r, Mtm, Oto, p):
             return max(start, List_creneau_taken_for_o[-1][1] + 1, List_creneau_taken_for_m[-1][1] + 1)
 
 
-def create_solution_glouton(path):
-    J, I, M, O, alpha, beta, S, r, d, w, p, M_space, O_space_3d, O_space_2d = extract_data.return_all_parameters(path)
+def create_solution_glouton(type_data, Sort_S=None, Sort_r=None):
+    J, I, M, O, alpha, beta, S, r, d, w, p, M_space, O_space_3d, O_space_2d = extract_data.return_all_parameters(
+        type_data)
     Bi, Mi, Oi = [-1] * I, [-1] * I, [-1] * I
 
     Mtm = []
@@ -80,19 +81,19 @@ def create_solution_glouton(path):
     Oto = []
     for o in range(O):
         Oto.append([])
-
-    Sort_S = []
-    Sort_r = []
-    Data_job = {}
-    for j in range(J):
-        Data_job[w[j]] = []
-    for j in range(J):
-        Data_job[w[j]].append([S[j], r[j]])
-    Data_job = collections.OrderedDict(sorted(Data_job.items(),reverse=True))
-    for key, values in Data_job.items():
-        for k in range(len(values)):
-            Sort_S.append(values[k][0])
-            Sort_r.append(values[k][1])
+    if (Sort_S and Sort_r) is None:
+        Sort_S = []
+        Sort_r = []
+        Data_job = {}
+        for j in range(J):
+            Data_job[w[j]] = []
+        for j in range(J):
+            Data_job[w[j]].append([S[j], r[j]])
+        Data_job = collections.OrderedDict(sorted(Data_job.items(), reverse=True))
+        for key, values in Data_job.items():
+            for k in range(len(values)):
+                Sort_S.append(values[k][0])
+                Sort_r.append(values[k][1])
 
     for j in range(J):
         for k, i in enumerate(Sort_S[j]):
@@ -125,19 +126,15 @@ def create_solution_glouton(path):
                 bisect.insort(Oto[o_start], [start, start + p[i]])
     return analysis_sol.Solution(Bi, Mi, Oi)
 
-Space_instance = [analysis_sol.read_instance('Instances/KIRO-tiny.json'),
-                  analysis_sol.read_instance('Instances/KIRO-small.json'),
-                  analysis_sol.read_instance('Instances/KIRO-medium.json'),
-                  analysis_sol.read_instance('Instances/KIRO-large.json')]
 
-sol_tiny = create_solution_glouton('Instances/KIRO-tiny.json')
+Space_instance = {'tiny': analysis_sol.read_instance('Instances/KIRO-tiny.json'),
+                  'small': analysis_sol.read_instance('Instances/KIRO-small.json'),
+                  'medium': analysis_sol.read_instance('Instances/KIRO-medium.json'),
+                  'large': analysis_sol.read_instance('Instances/KIRO-large.json')}
+Space_sol_glouton = {'tiny': create_solution_glouton('tiny'),
+                     'small': create_solution_glouton('small'),
+                     'medium': create_solution_glouton('medium'),
+                     'large': create_solution_glouton('large')}
 
-sol_small = create_solution_glouton('Instances/KIRO-small.json')
-
-sol_medium = create_solution_glouton('Instances/KIRO-medium.json')
-
-sol_large = create_solution_glouton('Instances/KIRO-large.json')
-
-Space_sol_glouton = [sol_tiny, sol_small, sol_medium, sol_large]
-Space_cost_glouton = [analysis_sol.cost(Space_sol_glouton[i], Space_instance[i]) for i in range(4)]
-cost_glouton = sum(Space_cost_glouton)
+Space_cost_glouton = {i:analysis_sol.cost(Space_sol_glouton[i], Space_instance[i]) for i in Space_sol_glouton.keys()}
+cost_glouton = sum(Space_cost_glouton[i] for i in Space_sol_glouton.keys())

@@ -2,8 +2,8 @@ from mip import Model, minimize, INTEGER, BINARY
 import extract_data
 from tqdm import tqdm
 
-path = 'Instances/KIRO-tiny.json'
-J, I, M, O, alpha, beta, S, r, d, w, p, M_space, O_space_3d, O_space_2d = extract_data.return_all_parameters(path)
+type_data = 'tiny'
+J, I, M, O, alpha, beta, S, r, d, w, p, M_space, O_space_3d, O_space_2d = extract_data.return_all_parameters(type_data)
 
 THETA, Km, Ko = sum(p[i] for i in range(I)) * 5, M + 20, O + 20
 

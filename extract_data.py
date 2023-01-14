@@ -1,7 +1,7 @@
 import tools_json
 
-def return_all_parameters(path):
-    brut_data = tools_json.read_json(path)
+def return_all_parameters(type_data):
+    brut_data = tools_json.read_json(type_data)
 
     """Instances Parameters"""
 
