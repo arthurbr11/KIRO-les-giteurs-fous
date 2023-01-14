@@ -1,6 +1,8 @@
 import numpy as np
 import bisect
 import collections
+import time
+
 import extract_data
 import tools_json
 import analysis_sol
@@ -123,29 +125,19 @@ def create_solution_glouton(path):
                 bisect.insort(Oto[o_start], [start, start + p[i]])
     return analysis_sol.Solution(Bi, Mi, Oi)
 
-
 Space_instance = [analysis_sol.read_instance('Instances/KIRO-tiny.json'),
                   analysis_sol.read_instance('Instances/KIRO-small.json'),
                   analysis_sol.read_instance('Instances/KIRO-medium.json'),
                   analysis_sol.read_instance('Instances/KIRO-large.json')]
 
 sol_tiny = create_solution_glouton('Instances/KIRO-tiny.json')
-print(analysis_sol.is_feasible(sol_tiny, Space_instance[0]))
-tools_json.solution_create_field(sol_tiny, 'Instances/KIRO-tiny-glouton.json')
 
 sol_small = create_solution_glouton('Instances/KIRO-small.json')
-print(analysis_sol.is_feasible(sol_small, Space_instance[1]))
-tools_json.solution_create_field(sol_small, 'Instances/KIRO-small-glouton.json')
 
 sol_medium = create_solution_glouton('Instances/KIRO-medium.json')
-print(analysis_sol.is_feasible(sol_medium, Space_instance[2]))
-tools_json.solution_create_field(sol_medium, 'Instances/KIRO-medium-glouton.json')
 
 sol_large = create_solution_glouton('Instances/KIRO-large.json')
-print(analysis_sol.is_feasible(sol_large, Space_instance[3]))
-tools_json.solution_create_field(sol_large, 'Instances/KIRO-large-glouton.json')
 
 Space_sol_glouton = [sol_tiny, sol_small, sol_medium, sol_large]
 Space_cost_glouton = [analysis_sol.cost(Space_sol_glouton[i], Space_instance[i]) for i in range(4)]
 cost_glouton = sum(Space_cost_glouton)
-print(cost_glouton)
