@@ -1,8 +1,5 @@
 import tools_json
-import numpy as np
 
-from pprint import pprint
-'Instances/KIRO-tiny.json'
 def return_all_parameters(path):
     brut_data = tools_json.read_json(path)
 
@@ -58,7 +55,3 @@ def return_all_parameters(path):
         O_space_3d.append(Oi)
 
     return (J,I,M,O,alpha,beta,S,r,d,w,p,M_space,O_space_3d,O_space_2d)
-
-
-
-return_all_parameters('Instances/KIRO-tiny.json')
