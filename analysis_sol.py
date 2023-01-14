@@ -47,10 +47,9 @@ class Instance:
     def nb_machines(self):
         return np.shape(self.operators)[1]
 
-
     def show(self):
-        print('Instance with {} operators, unit penalty {}, tadiness {} and \n'.format(self.nb_operators, self.alpha,
-                                                                                       self.beta))
+        print('Instance with {} operators, unit penalty {}, tardiness {} and \n'.format(self.nb_operators, self.alpha,
+                                                                                        self.beta))
         print("Jobs : \n")
         for j in range(self.nb_jobs()):
             self.jobs[j].show()
@@ -95,7 +94,8 @@ def is_feasible(solution, instance, verbose=True):
             if start_time < current_time:
                 if verbose:
                     print(
-                        f'Task {task_index + 1} started before previous one (or before the release date if it is the first one)')
+                        f'Task {task_index + 1} started before previous one (or before the release date if it is the '
+                        f'first one)')
                 return False
             current_time += task.processing_time
 
@@ -168,7 +168,7 @@ Compute the objective value of `solution` for given `instance`.
 
 
 def cost(solution, instance):
-    return sum(job_cost(j, solution, instance) for j in (instance.nb_jobs()))
+    return sum(job_cost(j, solution, instance) for j in range(instance.nb_jobs()))
 
 
 """
@@ -195,7 +195,7 @@ def read_instance(path):
     jobs = [
         Job(
             index=job["job"],
-            task_sequence=[i-1 for i in job["sequence"]],
+            task_sequence=[i - 1 for i in job["sequence"]],
             release_date=job["release_date"],
             due_date=job["due_date"],
             weight=job["weight"],
@@ -207,7 +207,7 @@ def read_instance(path):
         Task(
             index=task["task"] - 1,
             processing_time=task["processing_time"],
-            machines=[l["machine"]-1 for l in task["machines"]],
+            machines=[l["machine"] - 1 for l in task["machines"]],
         ) for task in tasks_data
     ]
 
