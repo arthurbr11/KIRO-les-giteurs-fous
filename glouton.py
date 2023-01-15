@@ -142,4 +142,4 @@ if __name__ == "__main__":
         print(analysis_sol.is_feasible(SOL_GLOUTON[type_data[k]],INSTANCE[type_data[k]]))
 
 COST_GLOUTON = {i: analysis_sol.cost(SOL_GLOUTON[i], INSTANCE[i]) for i in SOL_GLOUTON.keys()}
-COST_TOTAL_GLOUTON = sum(COST_GLOUTON[i] for i in SOL_GLOUTON.keys())
+COST_TOTAL_GLOUTON = sum(COST_GLOUTON[i] for i in COST_GLOUTON.keys())
