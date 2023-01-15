@@ -84,7 +84,7 @@ def create_solution_glouton_sort_date(type_data):
     Tasks,date,S_associate=[i for i in range(I)],[0]*I,[0]*I
     for j in range(J):
         for k,i in enumerate(S[j]):
-            date[i]=r[j]+sum(p[l] for l in S[j][0:k+1])
+            date[i]=r[j]+sum(p[l] for l in S[j][0:k])
             S_associate[i]=S[j].copy()
     Tasks=sorted(Tasks,key=lambda task: date[task])
     date=sorted(date)
@@ -93,7 +93,7 @@ def create_solution_glouton_sort_date(type_data):
         sort_s_associate[i]=S_associate[Tasks[i]]
 
     for k,task in enumerate(Tasks):
-        if task==13:
+        if task==13 or task==17:
             d=0
         possibilities = operator_machine_for_task(task, O_space_2d)
         start_date_possibilities = []
@@ -105,7 +105,7 @@ def create_solution_glouton_sort_date(type_data):
                 start = start_date_possibilities[-1]
                 o_start, m_start = o, m
         for task_same_job in sort_s_associate[k]:
-            date[k] = start + p[task]
+            date[task_same_job] =max(start + p[task],date[task_same_job])
         Bi[task], Oi[task], Mi[task] = start, o_start, m_start
         bisect.insort(Mtm[m_start], [start, start + p[task]])
         bisect.insort(Oto[o_start], [start, start + p[task]])
