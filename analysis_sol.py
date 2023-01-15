@@ -1,119 +1,248 @@
 import numpy as np
-import bisect
-import collections
-import itertools
-from tqdm import tqdm
-
-import extract_data
-import tools_json
-import analysis_sol
-import glouton
-
-INSTANCE = glouton.INSTANCE
-SOL_GLOUTON = glouton.SOL_GLOUTON
-COST_GLOUTON = glouton.COST_GLOUTON
-COST_GLOUTON = glouton.COST_TOTAL_GLOUTON
+import json
 
 
-def glouton_all_init_tiny(type_data):
-    J, I, M, O, alpha, beta, S, r, d, w, p, M_space, O_SPACE_3d, O_SPACE_2d = extract_data.return_all_parameters(
-        type_data)
-    Jobs_caracteristics = [[S[i], r[i]] for i in range(J)]
-    permutations_jobs_caracteristics = list(itertools.permutations(Jobs_caracteristics))
+class Job:
+    def __init__(self, index, task_sequence, release_date, due_date, weight):
+        self.index = index
+        self.task_sequence = task_sequence
+        self.release_date = release_date
+        self.due_date = due_date
+        self.weight = weight
 
-    inst = INSTANCE[type_data]
-    sol = SOL_GLOUTON[type_data]
-    cost = analysis_sol.cost(sol, inst)
-    for index_perm, job_caracteristic in enumerate(permutations_jobs_caracteristics):
-
-        Sort_S = [job_caracteristic[j][0] for j in range(J)]
-        Sort_r = [job_caracteristic[j][1] for j in range(J)]
-
-        current_sol = glouton.create_solution_glouton(type_data, Sort_S, Sort_r)
-        if analysis_sol.is_feasible(current_sol, inst) and analysis_sol.cost(current_sol, inst) < cost:
-            sol = current_sol
-            cost = analysis_sol.cost(current_sol, inst)
-    return sol, cost
+    def show(self):
+        print("Job with index {} task sequence {} release date {} due date {} weight {}\n".format(self.index,
+                                                                                                  self.task_sequence,
+                                                                                                  self.release_date,
+                                                                                                  self.due_date,
+                                                                                                  self.weight))
 
 
-def Opti_glouton(type_data, sol, cost, itteration):
-    inst = INSTANCE[type_data]
-    sol = sol[type_data]
-    cost = cost[type_data]
-    J, I, M, O, alpha, beta, S, r, d, w, p, M_space, O_SPACE_3d, O_SPACE_2d = extract_data.return_all_parameters(
-        type_data)
+class Task:
+    def __init__(self, index, processing_time, machines):
+        self.index = index
+        self.processing_time = processing_time
+        self.machines = machines  # list of machine indices on which this task can be performed
 
-    current_sol = glouton.create_solution_glouton(type_data, S, r)
-    if analysis_sol.is_feasible(current_sol, inst) and analysis_sol.cost(current_sol, inst) < analysis_sol.cost(sol,
-                                                                                                                inst):
-        cost = analysis_sol.cost(current_sol, inst)
-        sol = current_sol
-    Sort_S = []
-    Sort_r = []
-    Data_job = {}
-    for j in range(J):
-        Data_job[w[j]] = []
-    for j in range(J):
-        Data_job[w[j]].append([S[j], r[j]])
-    Data_job = collections.OrderedDict(sorted(Data_job.items(), reverse=False))
-    for key, values in Data_job.items():
-        for k in range(len(values)):
-            Sort_S.append(values[k][0])
-            Sort_r.append(values[k][1])
-    current_sol = glouton.create_solution_glouton(type_data, Sort_S, Sort_r)
-    if analysis_sol.is_feasible(current_sol, inst) and analysis_sol.cost(current_sol, inst) < analysis_sol.cost(sol,
-                                                                                                                inst):
-        cost = analysis_sol.cost(current_sol, inst)
-        sol = current_sol
-    for _ in range(itteration):
-        index = np.random.permutation(J)
-        Sort_S = []
-        Sort_r = []
-        for j in range(J):
-            Sort_S.append(S[index[j]])
-            Sort_r.append(r[index[j]])
-        current_sol = glouton.create_solution_glouton(type_data, Sort_S, Sort_r)
-        if analysis_sol.is_feasible(current_sol, inst) and analysis_sol.cost(current_sol, inst) < analysis_sol.cost(sol,
-                                                                                                                    inst):
-            cost = analysis_sol.cost(current_sol, inst)
-            sol = current_sol
-    return sol, cost
+    def show(self):
+        print('Task with index {} processing time {} and machines {}\n'.format(self.index, self.processing_time,
+                                                                               self.machines))
 
 
-def glouton_random(sol_init, cost_init, itteration, verbose=True):
-    sol, cost = {}, {}
-    type_data = ['tiny', 'small', 'medium', 'large']
-    sol[type_data[0]], cost[type_data[0]] = glouton_all_init_tiny(type_data[0])
-    tools_json.solution_create_field(sol[type_data[0]], 'glouton_random/KIRO-tiny')
-    if verbose:
-        print(
-            f'On est passé de {cost_init[type_data[0]]} a {cost[type_data[0]]} sur {type_data[0]}.')
-    for k in range(1, 4):
-        sol[type_data[k]], cost[type_data[k]] = Opti_glouton(type_data[k], sol_init, cost_init, itteration)
-        tools_json.solution_create_field(sol[type_data[k]], f'glouton_random/KIRO-{type_data[k]}')
+class Instance:
+    def __init__(self, nb_operators, alpha, beta, jobs, tasks, operators):
+        self.nb_operators = nb_operators
+        self.alpha = alpha  # unit penalty
+        self.beta = beta  # tardiness
+        self.jobs = jobs
+        self.tasks = tasks
+        self.operators = operators  # operators[i-1, m-1] = list of operators that can operate task i on machine m
+
+    def nb_jobs(self):
+        return len(self.jobs)
+
+    def nb_tasks(self):
+        return len(self.tasks)
+
+    def nb_machines(self):
+        return np.shape(self.operators)[1]
+
+    def show(self):
+        print('Instance with {} operators, unit penalty {}, tardiness {} and \n'.format(self.nb_operators, self.alpha,
+                                                                                        self.beta))
+        print("Jobs : \n")
+        for j in range(self.nb_jobs()):
+            self.jobs[j].show()
+        print("Tasks: \n")
+        for t in range(self.nb_tasks()):
+            self.tasks[t].show()
+        print("Operators: \n")
+        print(self.operators)
+
+
+class Solution:
+    def __init__(self, starts, machines, operators):
+        self.starts = starts
+        self.machines = machines
+        self.operators = operators
+
+    def __eq__(self, other):
+        if self.starts != other.starts or self.machines != other.machines or self.operators != other.operators:
+            return False
+        return True
+
+
+"""
+    is_feasible(solution::Solution, instance::Instance; verbose=true)
+Check if `solution` is feasible for `instance`.
+Prints some warnings when solution is infeasible and `verbose` is `true`.
+"""
+
+
+def is_feasible(solution, instance, verbose=True):
+    starts, machines, operators = solution.starts, solution.machines, solution.operators
+
+    n = instance.nb_tasks()
+    if n != len(starts) or n != len(machines) or n != len(operators):
         if verbose:
-            print(
-                f'On est passé de {cost_init[type_data[k]]} a {cost[type_data[k]]} sur {type_data[k]}.')
-    cost_total_init = sum(c for c in cost_init.values())
-    cost_total = sum(c for c in cost.values())
+            print("Not all tasks are in the solution")
+        return False
 
-    if True:  # Verbose normaly
-        print(
-            f'On est passé de {cost_total_init} a {cost_total} sur le total.')
-    return sol, cost
+    # Check job related constraints
+    for job in instance.jobs:
+        current_time = job.release_date
+        for task_index in job.task_sequence:
+            task = instance.tasks[task_index]
+            start_time = starts[task_index]
+            # start time should occur after end of previous task (constraints 4 and 5)
+            if start_time < current_time:
+                if verbose:
+                    print(
+                        f'Task {task_index + 1} started before previous one (or before the release date if it is the '
+                        f'first one)')
+                return False
+            current_time += task.processing_time
+
+            machine_index = machines[task_index]
+            # the task needs to be compatible with the chosen machine
+            if machine_index not in task.machines:
+                if verbose:
+                    print(f'Machine {machine_index + 1} is not compatible with task {task_index + 1}')
+                return False
+
+            operator = operators[task_index]
+            # the chosen machine should be compatible with the chosen operator
+            if operator not in instance.operators[task_index, machine_index]:
+                if verbose:
+                    print(f'Operator {operator + 1} cannot operate machine {machine_index + 1}')
+                return False
+
+    # A machine cannot operate two tasks at the same time (constraint 7)
+    for m in range(instance.nb_machines()):
+        tasks_with_m = sorted([i for i in range(n) if (machines[i] == m)], key=lambda task: starts[task])
+        m_time = 0
+        for i in tasks_with_m:
+            if starts[i] < m_time:
+                if verbose:
+                    print(f'Two tasks (including {i + 1}) at the same time on machine {m + 1}')
+                return False
+            m_time = starts[i] + instance.tasks[i].processing_time
+    # An operator cannot operate two tasks at the same time (constraint 7)
+    for o in range(instance.nb_operators):
+        tasks_with_o = sorted([i for i in range(n) if (operators[i] == o)], key=lambda task: starts[task])
+        o_time = 0
+        for i in tasks_with_o:
+            if starts[i] < o_time:
+                if verbose:
+                    print(f'Two tasks at the same time with operator {o + 1} ({starts[i]}, {o_time})')
+                return False
+            o_time = starts[i] + instance.tasks[i].processing_time
+    return True
 
 
-if __name__ == "__main__":
-    path = ['SOL/glouton_random/KIRO-tiny-sol_11.json', 'SOL/glouton_random/KIRO-small-sol_11.json',
-            'SOL/glouton_random/KIRO-medium-sol_11.json', 'SOL/glouton_random/KIRO-large-sol_11.json']
-    SOL_CURRENT = {'tiny': analysis_sol.read_solution(path[0]),
-                   'small': analysis_sol.read_solution(path[1]),
-                   'medium': analysis_sol.read_solution(path[2]),
-                   'large': analysis_sol.read_solution(path[3])}
+"""
+    job_cost(job_index::Int, solution::Solution, instance::Instance)
+Compute the value of job `job_index` in the objective for `solution` in `instance`.
+"""
 
-    COST_CURRENT = {i: analysis_sol.cost(SOL_CURRENT[i], INSTANCE[i]) for i in SOL_CURRENT.keys()}
-    COST_TOTAL_CURRENT = sum(cost for cost in COST_CURRENT.values())
-    for _ in tqdm(range(100)):
-        SOL_CURRENT, COST_CURRENT = glouton_random(SOL_CURRENT, COST_CURRENT, 100, verbose=False)
 
-    COST_TOTAL_CURRENT = sum(cost for cost in COST_CURRENT.values())
+def job_cost(job_index, solution, instance):
+    alpha, beta, jobs, tasks = instance.alpha, instance.beta, instance.jobs, instance.tasks
+
+    job = jobs[job_index]
+
+    # Compute the job completion time
+    last_task_index = job.task_sequence[-1]
+    last_task = tasks[last_task_index]
+    completion_time = solution.starts[last_task_index] + last_task.processing_time
+
+    is_late = completion_time > job.due_date
+    tardiness = 0
+    if is_late:
+        tardiness = completion_time - job.due_date
+    return job.weight * (completion_time + alpha * is_late + beta * tardiness)
+
+
+"""
+    cost(solution::Solution, instance::Instance)
+Compute the objective value of `solution` for given `instance`.
+"""
+
+
+def cost(solution, instance):
+    return sum(job_cost(j, solution, instance) for j in range(instance.nb_jobs()))
+
+
+"""
+    read_instance(path::String)
+Read instance from json file `path`.
+"""
+
+
+def read_instance(path):
+    if not path.endswith('.json'):
+        print("No json in your file")
+        return
+    with open(path, 'r') as f:
+        data = json.load(f)
+    parameters_data = data["parameters"]
+    nb_tasks = parameters_data["size"]["nb_tasks"]
+    nb_machines = parameters_data["size"]["nb_machines"]
+    nb_operators = parameters_data["size"]["nb_operators"]
+    alpha = parameters_data["costs"]["unit_penalty"]
+    beta = parameters_data["costs"]["tardiness"]
+
+    jobs_data = data["jobs"]
+    jobs = [
+        Job(
+            index=job["job"],
+            task_sequence=[i - 1 for i in job["sequence"]],
+            release_date=job["release_date"],
+            due_date=job["due_date"],
+            weight=job["weight"],
+        ) for job in jobs_data
+    ]
+
+    tasks_data = data["tasks"]
+    tasks = [
+        Task(
+            index=task["task"] - 1,
+            processing_time=task["processing_time"],
+            machines=[l["machine"] - 1 for l in task["machines"]],
+        ) for task in tasks_data
+    ]
+
+    operators = np.empty((nb_tasks, nb_machines), dtype=object)
+    for task in tasks_data:
+        i = task["task"]
+        for machine in task["machines"]:
+            m = machine["machine"]
+            operator_list = [o - 1 for o in machine["operators"]]
+            operators[i - 1, m - 1] = operator_list
+
+    return Instance(nb_operators, alpha, beta, jobs, tasks, operators)
+
+
+"""
+    read_solution(path::String)
+Read solution from json file `path`.
+"""
+
+
+def read_solution(path):
+    if not path.endswith('.json'):
+        print("No json in your file")
+        return
+    with open(path, 'r') as f:
+        data = json.load(f)
+
+    nb_tasks = len(data)
+    starts = [0] * nb_tasks
+    machines = [0] * nb_tasks
+    operators = [0] * nb_tasks
+    for task in data:
+        task_index = task["task"]
+        starts[task_index - 1] = task["start"]
+        machines[task_index - 1] = task["machine"] - 1
+        operators[task_index - 1] = task["operator"] - 1
+    return Solution(starts, machines, operators)
