@@ -33,11 +33,11 @@
     "task": 6,
     "start": 7,
     "machine": 3,
-    "operator": 8
+    "operator": 2
   },
   {
     "task": 7,
-    "start": 8,
+    "start": 7,
     "machine": 5,
     "operator": 1
   },
@@ -62,7 +62,7 @@
   {
     "task": 11,
     "start": 9,
-    "machine": 3,
+    "machine": 1,
     "operator": 8
   },
   {
@@ -91,9 +91,9 @@
   },
   {
     "task": 16,
-    "start": 7,
+    "start": 8,
     "machine": 5,
-    "operator": 2
+    "operator": 3
   },
   {
     "task": 17,
@@ -109,9 +109,9 @@
   },
   {
     "task": 19,
-    "start": 9,
+    "start": 8,
     "machine": 1,
-    "operator": 4
+    "operator": 5
   },
   {
     "task": 20,
@@ -129,7 +129,7 @@
     "task": 22,
     "start": 8,
     "machine": 8,
-    "operator": 3
+    "operator": 4
   },
   {
     "task": 23,

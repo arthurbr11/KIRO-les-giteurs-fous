@@ -73,11 +73,11 @@ def start_for_task(o, m, i, r, Mtm, Oto, p):
 
 
 def compare(task_date_job1, task_date_job2):
-    task1, date1, weight_job1 = task_date_job1
-    task2, date2, weight_job2 = task_date_job2
-    if date1 < date2:
+    task1, date1, weight_job1 , due_date1 = task_date_job1
+    task2, date2, weight_job2 , due_date2 = task_date_job2
+    if due_date1 < due_date2:
         return -1
-    elif date1 > date2:
+    elif due_date1 > due_date2:
         return +1
     else:
         if weight_job1 >= weight_job2:
@@ -97,17 +97,19 @@ def create_solution_glouton_sort_date(type_data):
     Oto = []
     for o in range(O):
         Oto.append([])
-    Tasks_date_job, S_associate = [[i, 0, -1] for i in range(I)], [0] * I,
+    Tasks_date_job_last_date, S_associate = [[i, 0, -1,0] for i in range(I)], [0] * I,
     for j in range(J):
         for k, i in enumerate(S[j]):
-            Tasks_date_job[i][2] = 0.7*M_space[i].count(0) + 0.1*sum(len(O_space_2d[i][m]) for m in range(M))
+            Tasks_date_job_last_date[i][2] = d[j]
             if k == 0:
-                Tasks_date_job[i][1] = r[i]
+                Tasks_date_job_last_date[i][1] = r[i]
+                Tasks_date_job_last_date[i][3]= d[j]-sum(p[task] for task in S[j])
             else:
-                Tasks_date_job[i][1] = Tasks_date_job[S[j][k - 1]][1] + p[S[j][k - 1]]
+                Tasks_date_job_last_date[i][1] = Tasks_date_job_last_date[S[j][k - 1]][1] + p[S[j][k - 1]]
+                Tasks_date_job_last_date[i][3] = d[j]-sum(p[task] for task in S[j][k:len(S[j])])
             S_associate[i] = S[j].copy()
 
-    Tasks_date_job_sort = sorted(Tasks_date_job, key=functools.cmp_to_key(compare))
+    Tasks_date_job_sort = sorted(Tasks_date_job_last_date, key=functools.cmp_to_key(compare))
     Tasks, date = [0] * I, [0] * I
     sort_s_associate = [0] * I
     Table_coresp = [0] * I
@@ -136,6 +138,8 @@ def create_solution_glouton_sort_date(type_data):
                 date[k] = start
             if c:
                 date[Table_coresp[task_same_job]] = start + sum(p[i] for i in sort_s_associate[k][index:l])
+            if not c:
+                date[Table_coresp[task_same_job]] = start - sum(p[i] for i in sort_s_associate[k][l-1:index+1])-1
         Bi[task], Oi[task], Mi[task] = start, o_start, m_start
         bisect.insort(Mtm[m_start], [start, start + p[task]])
         bisect.insort(Oto[o_start], [start, start + p[task]])
@@ -155,8 +159,7 @@ path = ['SOL/glouton_sort_date/KIRO-tiny-sol_11.json', 'SOL/glouton_sort_date/KI
         'SOL/glouton_sort_date/KIRO-medium-sol_11.json', 'SOL/glouton_sort_date/KIRO-large-sol_11.json']
 if __name__ == "__main__":
     for k in range(4):
-        if analysis_sol.cost(SOL_GLOUTON_SORT[type_data[k]], INSTANCE[type_data[k]])<analysis_sol.cost(analysis_sol.read_solution(path[k]),INSTANCE[type_data[k]]):
-            tools_json.solution_create_field(SOL_GLOUTON_SORT[type_data[k]], f'glouton_sort_date/KIRO-{type_data[k]}')
+        tools_json.solution_create_field(SOL_GLOUTON_SORT[type_data[k]], f'glouton_sort_date/KIRO-{type_data[k]}')
         print(analysis_sol.is_feasible(SOL_GLOUTON_SORT[type_data[k]], INSTANCE[type_data[k]]))
 
     COST_GLOUTON_SORT = {i: analysis_sol.cost(SOL_GLOUTON_SORT[i], INSTANCE[i]) for i in SOL_GLOUTON_SORT.keys()}
