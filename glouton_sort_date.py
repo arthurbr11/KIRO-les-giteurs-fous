@@ -100,7 +100,7 @@ def create_solution_glouton_sort_date(type_data):
     Tasks_date_job_last_date, S_associate = [[i, 0, -1,0] for i in range(I)], [0] * I,
     for j in range(J):
         for k, i in enumerate(S[j]):
-            Tasks_date_job_last_date[i][2] = d[j]
+            Tasks_date_job_last_date[i][2] = sum(len(O_space_2d[i][m]) for m in range(M))
             if k == 0:
                 Tasks_date_job_last_date[i][1] = r[i]
                 Tasks_date_job_last_date[i][3]= d[j]-sum(p[task] for task in S[j])
@@ -159,10 +159,11 @@ path = ['SOL/glouton_sort_date/KIRO-tiny-sol_11.json', 'SOL/glouton_sort_date/KI
         'SOL/glouton_sort_date/KIRO-medium-sol_11.json', 'SOL/glouton_sort_date/KIRO-large-sol_11.json']
 if __name__ == "__main__":
     for k in range(4):
-        tools_json.solution_create_field(SOL_GLOUTON_SORT[type_data[k]], f'glouton_sort_date/KIRO-{type_data[k]}')
+        if analysis_sol.cost(SOL_GLOUTON_SORT[type_data[k]], INSTANCE[type_data[k]])<analysis_sol.cost(analysis_sol.read_solution(path[k]), INSTANCE[type_data[k]]):
+            tools_json.solution_create_field(SOL_GLOUTON_SORT[type_data[k]], f'glouton_sort_date/KIRO-{type_data[k]}')
         print(analysis_sol.is_feasible(SOL_GLOUTON_SORT[type_data[k]], INSTANCE[type_data[k]]))
 
-    COST_GLOUTON_SORT = {i: analysis_sol.cost(SOL_GLOUTON_SORT[i], INSTANCE[i]) for i in SOL_GLOUTON_SORT.keys()}
+    COST_GLOUTON_SORT = {type_data[i]: analysis_sol.cost(SOL_GLOUTON_SORT[type_data[i]], INSTANCE[type_data[i]]) for i in range(4)}
     COST_TOTAL_GLOUTON_SORT = sum(COST_GLOUTON_SORT[i] for i in COST_GLOUTON_SORT.keys())
     pprint(COST_GLOUTON_SORT)
     print(COST_TOTAL_GLOUTON_SORT)
