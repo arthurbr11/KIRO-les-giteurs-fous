@@ -1,32 +1,32 @@
 [
   {
     "task": 1,
-    "start": 46,
+    "start": 47,
     "machine": 3,
     "operator": 2
   },
   {
     "task": 2,
-    "start": 30,
-    "machine": 5,
-    "operator": 6
+    "start": 56,
+    "machine": 4,
+    "operator": 5
   },
   {
     "task": 3,
     "start": 7,
-    "machine": 8,
-    "operator": 9
+    "machine": 9,
+    "operator": 8
   },
   {
     "task": 4,
-    "start": 27,
-    "machine": 13,
-    "operator": 14
+    "start": 28,
+    "machine": 11,
+    "operator": 11
   },
   {
     "task": 5,
     "start": 29,
-    "machine": 18,
+    "machine": 17,
     "operator": 18
   },
   {
@@ -38,32 +38,32 @@
   {
     "task": 7,
     "start": 35,
-    "machine": 2,
-    "operator": 2
+    "machine": 3,
+    "operator": 3
   },
   {
     "task": 8,
     "start": 18,
-    "machine": 5,
-    "operator": 5
+    "machine": 4,
+    "operator": 6
   },
   {
     "task": 9,
     "start": 3,
-    "machine": 7,
-    "operator": 7
+    "machine": 9,
+    "operator": 8
   },
   {
     "task": 10,
     "start": 25,
-    "machine": 13,
-    "operator": 14
+    "machine": 15,
+    "operator": 15
   },
   {
     "task": 11,
     "start": 18,
-    "machine": 17,
-    "operator": 17
+    "machine": 18,
+    "operator": 19
   },
   {
     "task": 12,
@@ -74,32 +74,32 @@
   {
     "task": 13,
     "start": 34,
-    "machine": 3,
+    "machine": 2,
     "operator": 3
   },
   {
     "task": 14,
     "start": 21,
-    "machine": 6,
-    "operator": 5
+    "machine": 5,
+    "operator": 6
   },
   {
     "task": 15,
     "start": 8,
     "machine": 9,
-    "operator": 7
+    "operator": 8
   },
   {
     "task": 16,
     "start": 20,
-    "machine": 13,
-    "operator": 13
+    "machine": 14,
+    "operator": 11
   },
   {
     "task": 17,
     "start": 14,
-    "machine": 17,
-    "operator": 17
+    "machine": 19,
+    "operator": 16
   },
   {
     "task": 18,
@@ -110,32 +110,32 @@
   {
     "task": 19,
     "start": 34,
-    "machine": 2,
+    "machine": 3,
     "operator": 2
   },
   {
     "task": 20,
     "start": 1,
-    "machine": 4,
-    "operator": 5
+    "machine": 6,
+    "operator": 6
   },
   {
     "task": 21,
     "start": 14,
-    "machine": 9,
+    "machine": 8,
     "operator": 10
   },
   {
     "task": 22,
     "start": 11,
-    "machine": 14,
-    "operator": 12
+    "machine": 15,
+    "operator": 13
   },
   {
     "task": 23,
     "start": 18,
-    "machine": 16,
-    "operator": 16
+    "machine": 20,
+    "operator": 20
   },
   {
     "task": 24,
@@ -151,27 +151,27 @@
   },
   {
     "task": 26,
-    "start": 35,
-    "machine": 6,
+    "start": 40,
+    "machine": 4,
     "operator": 6
   },
   {
     "task": 27,
-    "start": 18,
-    "machine": 10,
+    "start": 19,
+    "machine": 7,
     "operator": 10
   },
   {
     "task": 28,
-    "start": 29,
+    "start": 39,
     "machine": 13,
-    "operator": 15
+    "operator": 13
   },
   {
     "task": 29,
     "start": 17,
-    "machine": 18,
-    "operator": 18
+    "machine": 16,
+    "operator": 17
   },
   {
     "task": 30,
@@ -189,25 +189,25 @@
     "task": 32,
     "start": 5,
     "machine": 4,
-    "operator": 4
+    "operator": 5
   },
   {
     "task": 33,
     "start": 18,
-    "machine": 9,
-    "operator": 9
+    "machine": 7,
+    "operator": 10
   },
   {
     "task": 34,
     "start": 25,
-    "machine": 11,
-    "operator": 11
+    "machine": 12,
+    "operator": 14
   },
   {
     "task": 35,
     "start": 25,
-    "machine": 18,
-    "operator": 18
+    "machine": 20,
+    "operator": 16
   },
   {
     "task": 36,
@@ -230,20 +230,20 @@
   {
     "task": 39,
     "start": 11,
-    "machine": 8,
+    "machine": 9,
     "operator": 10
   },
   {
     "task": 40,
     "start": 2,
-    "machine": 11,
-    "operator": 11
+    "machine": 13,
+    "operator": 12
   },
   {
     "task": 41,
     "start": 7,
-    "machine": 18,
-    "operator": 18
+    "machine": 20,
+    "operator": 16
   },
   {
     "task": 42,
@@ -260,26 +260,26 @@
   {
     "task": 44,
     "start": 21,
-    "machine": 5,
+    "machine": 4,
     "operator": 4
   },
   {
     "task": 45,
     "start": 25,
-    "machine": 9,
-    "operator": 10
+    "machine": 7,
+    "operator": 9
   },
   {
     "task": 46,
     "start": 2,
-    "machine": 12,
-    "operator": 12
+    "machine": 11,
+    "operator": 13
   },
   {
     "task": 47,
     "start": 6,
     "machine": 16,
-    "operator": 16
+    "operator": 17
   },
   {
     "task": 48,
@@ -289,33 +289,33 @@
   },
   {
     "task": 49,
-    "start": 61,
+    "start": 62,
     "machine": 3,
-    "operator": 3
+    "operator": 2
   },
   {
     "task": 50,
     "start": 4,
-    "machine": 6,
+    "machine": 5,
     "operator": 6
   },
   {
     "task": 51,
-    "start": 20,
+    "start": 31,
     "machine": 8,
     "operator": 10
   },
   {
     "task": 52,
     "start": 26,
-    "machine": 14,
-    "operator": 13
+    "machine": 11,
+    "operator": 11
   },
   {
     "task": 53,
     "start": 3,
-    "machine": 16,
-    "operator": 16
+    "machine": 18,
+    "operator": 17
   },
   {
     "task": 54,
@@ -325,33 +325,33 @@
   },
   {
     "task": 55,
-    "start": 41,
+    "start": 46,
     "machine": 3,
     "operator": 3
   },
   {
     "task": 56,
     "start": 3,
-    "machine": 4,
+    "machine": 6,
     "operator": 4
   },
   {
     "task": 57,
     "start": 22,
-    "machine": 9,
-    "operator": 8
+    "machine": 8,
+    "operator": 9
   },
   {
     "task": 58,
     "start": 9,
-    "machine": 11,
-    "operator": 11
+    "machine": 13,
+    "operator": 14
   },
   {
     "task": 59,
     "start": 16,
-    "machine": 17,
-    "operator": 17
+    "machine": 19,
+    "operator": 16
   },
   {
     "task": 60,
@@ -363,25 +363,25 @@
     "task": 61,
     "start": 7,
     "machine": 3,
-    "operator": 3
+    "operator": 2
   },
   {
     "task": 62,
-    "start": 39,
-    "machine": 6,
-    "operator": 6
+    "start": 64,
+    "machine": 4,
+    "operator": 5
   },
   {
     "task": 63,
     "start": 18,
     "machine": 8,
-    "operator": 8
+    "operator": 9
   },
   {
     "task": 64,
-    "start": 42,
-    "machine": 12,
-    "operator": 11
+    "start": 47,
+    "machine": 11,
+    "operator": 12
   },
   {
     "task": 65,
@@ -398,32 +398,32 @@
   {
     "task": 67,
     "start": 12,
-    "machine": 3,
-    "operator": 3
+    "machine": 2,
+    "operator": 2
   },
   {
     "task": 68,
     "start": 3,
-    "machine": 6,
+    "machine": 4,
     "operator": 6
   },
   {
     "task": 69,
     "start": 10,
-    "machine": 8,
-    "operator": 7
+    "machine": 7,
+    "operator": 8
   },
   {
     "task": 70,
-    "start": 29,
-    "machine": 12,
+    "start": 30,
+    "machine": 14,
     "operator": 13
   },
   {
     "task": 71,
     "start": 9,
-    "machine": 18,
-    "operator": 18
+    "machine": 16,
+    "operator": 16
   },
   {
     "task": 72,
@@ -439,27 +439,27 @@
   },
   {
     "task": 74,
-    "start": 30,
-    "machine": 4,
-    "operator": 4
+    "start": 31,
+    "machine": 5,
+    "operator": 6
   },
   {
     "task": 75,
     "start": 6,
-    "machine": 9,
-    "operator": 9
+    "machine": 10,
+    "operator": 8
   },
   {
     "task": 76,
     "start": 18,
-    "machine": 14,
-    "operator": 13
+    "machine": 11,
+    "operator": 12
   },
   {
     "task": 77,
     "start": 42,
-    "machine": 16,
-    "operator": 16
+    "machine": 18,
+    "operator": 17
   },
   {
     "task": 78,
@@ -475,27 +475,27 @@
   },
   {
     "task": 80,
-    "start": 37,
-    "machine": 6,
-    "operator": 6
+    "start": 31,
+    "machine": 4,
+    "operator": 4
   },
   {
     "task": 81,
-    "start": 39,
+    "start": 33,
     "machine": 9,
     "operator": 9
   },
   {
     "task": 82,
     "start": 44,
-    "machine": 11,
-    "operator": 12
+    "machine": 14,
+    "operator": 14
   },
   {
     "task": 83,
-    "start": 20,
-    "machine": 19,
-    "operator": 18
+    "start": 22,
+    "machine": 20,
+    "operator": 17
   },
   {
     "task": 84,
@@ -512,26 +512,26 @@
   {
     "task": 86,
     "start": 34,
-    "machine": 4,
-    "operator": 4
+    "machine": 6,
+    "operator": 6
   },
   {
     "task": 87,
     "start": 8,
     "machine": 8,
-    "operator": 8
+    "operator": 10
   },
   {
     "task": 88,
     "start": 14,
-    "machine": 11,
-    "operator": 11
+    "machine": 15,
+    "operator": 12
   },
   {
     "task": 89,
     "start": 5,
-    "machine": 17,
-    "operator": 17
+    "machine": 20,
+    "operator": 20
   },
   {
     "task": 90,
@@ -547,27 +547,27 @@
   },
   {
     "task": 92,
-    "start": 48,
-    "machine": 4,
-    "operator": 4
+    "start": 49,
+    "machine": 5,
+    "operator": 6
   },
   {
     "task": 93,
     "start": 35,
-    "machine": 7,
-    "operator": 8
+    "machine": 10,
+    "operator": 9
   },
   {
     "task": 94,
     "start": 11,
-    "machine": 11,
-    "operator": 13
+    "machine": 14,
+    "operator": 14
   },
   {
     "task": 95,
     "start": 41,
-    "machine": 16,
-    "operator": 16
+    "machine": 18,
+    "operator": 19
   },
   {
     "task": 96,
@@ -579,31 +579,31 @@
     "task": 97,
     "start": 8,
     "machine": 2,
-    "operator": 2
+    "operator": 3
   },
   {
     "task": 98,
     "start": 7,
     "machine": 5,
-    "operator": 5
+    "operator": 6
   },
   {
     "task": 99,
     "start": 9,
-    "machine": 7,
-    "operator": 9
+    "machine": 9,
+    "operator": 7
   },
   {
     "task": 100,
-    "start": 40,
+    "start": 34,
     "machine": 12,
     "operator": 11
   },
   {
     "task": 101,
     "start": 25,
-    "machine": 16,
-    "operator": 16
+    "machine": 17,
+    "operator": 19
   },
   {
     "task": 102,
@@ -615,31 +615,31 @@
     "task": 103,
     "start": 45,
     "machine": 2,
-    "operator": 2
+    "operator": 3
   },
   {
     "task": 104,
     "start": 11,
     "machine": 4,
-    "operator": 4
+    "operator": 5
   },
   {
     "task": 105,
-    "start": 21,
-    "machine": 8,
-    "operator": 9
+    "start": 31,
+    "machine": 9,
+    "operator": 7
   },
   {
     "task": 106,
     "start": 58,
-    "machine": 11,
+    "machine": 12,
     "operator": 12
   },
   {
     "task": 107,
     "start": 32,
-    "machine": 16,
-    "operator": 16
+    "machine": 19,
+    "operator": 18
   },
   {
     "task": 108,
@@ -650,32 +650,32 @@
   {
     "task": 109,
     "start": 61,
-    "machine": 2,
-    "operator": 2
+    "machine": 3,
+    "operator": 3
   },
   {
     "task": 110,
     "start": 4,
-    "machine": 5,
+    "machine": 4,
     "operator": 5
   },
   {
     "task": 111,
     "start": 6,
-    "machine": 8,
-    "operator": 8
+    "machine": 9,
+    "operator": 10
   },
   {
     "task": 112,
     "start": 8,
-    "machine": 12,
-    "operator": 12
+    "machine": 15,
+    "operator": 13
   },
   {
     "task": 113,
     "start": 7,
-    "machine": 17,
-    "operator": 17
+    "machine": 18,
+    "operator": 19
   },
   {
     "task": 114,
@@ -686,14 +686,14 @@
   {
     "task": 115,
     "start": 40,
-    "machine": 2,
+    "machine": 3,
     "operator": 2
   },
   {
     "task": 116,
-    "start": 31,
-    "machine": 6,
-    "operator": 5
+    "start": 60,
+    "machine": 4,
+    "operator": 6
   },
   {
     "task": 117,
@@ -704,14 +704,14 @@
   {
     "task": 118,
     "start": 36,
-    "machine": 11,
-    "operator": 12
+    "machine": 14,
+    "operator": 13
   },
   {
     "task": 119,
     "start": 20,
-    "machine": 17,
-    "operator": 17
+    "machine": 20,
+    "operator": 18
   },
   {
     "task": 120,
@@ -721,33 +721,33 @@
   },
   {
     "task": 121,
-    "start": 50,
+    "start": 51,
     "machine": 2,
-    "operator": 2
+    "operator": 3
   },
   {
     "task": 122,
     "start": 46,
-    "machine": 5,
-    "operator": 5
+    "machine": 6,
+    "operator": 6
   },
   {
     "task": 123,
     "start": 41,
     "machine": 7,
-    "operator": 7
+    "operator": 10
   },
   {
     "task": 124,
     "start": 5,
-    "machine": 11,
-    "operator": 11
+    "machine": 14,
+    "operator": 15
   },
   {
     "task": 125,
-    "start": 40,
-    "machine": 18,
-    "operator": 18
+    "start": 65,
+    "machine": 20,
+    "operator": 19
   },
   {
     "task": 126,
@@ -764,25 +764,25 @@
   {
     "task": 128,
     "start": 45,
-    "machine": 4,
+    "machine": 5,
     "operator": 4
   },
   {
     "task": 129,
     "start": 38,
-    "machine": 7,
+    "machine": 8,
     "operator": 8
   },
   {
     "task": 130,
     "start": 17,
-    "machine": 11,
-    "operator": 11
+    "machine": 14,
+    "operator": 13
   },
   {
     "task": 131,
     "start": 47,
-    "machine": 16,
+    "machine": 20,
     "operator": 16
   },
   {
@@ -794,32 +794,32 @@
   {
     "task": 133,
     "start": 24,
-    "machine": 3,
-    "operator": 3
+    "machine": 2,
+    "operator": 2
   },
   {
     "task": 134,
-    "start": 25,
+    "start": 36,
     "machine": 6,
     "operator": 5
   },
   {
     "task": 135,
     "start": 5,
-    "machine": 7,
-    "operator": 7
+    "machine": 8,
+    "operator": 9
   },
   {
     "task": 136,
     "start": 23,
     "machine": 11,
-    "operator": 13
+    "operator": 15
   },
   {
     "task": 137,
     "start": 15,
-    "machine": 19,
-    "operator": 19
+    "machine": 18,
+    "operator": 18
   },
   {
     "task": 138,
@@ -830,32 +830,32 @@
   {
     "task": 139,
     "start": 37,
-    "machine": 2,
+    "machine": 3,
     "operator": 2
   },
   {
     "task": 140,
     "start": 12,
-    "machine": 4,
+    "machine": 5,
     "operator": 4
   },
   {
     "task": 141,
     "start": 19,
-    "machine": 7,
-    "operator": 7
+    "machine": 10,
+    "operator": 8
   },
   {
     "task": 142,
     "start": 7,
-    "machine": 11,
-    "operator": 11
+    "machine": 13,
+    "operator": 12
   },
   {
     "task": 143,
-    "start": 42,
-    "machine": 19,
-    "operator": 19
+    "start": 67,
+    "machine": 16,
+    "operator": 18
   },
   {
     "task": 144,
@@ -866,32 +866,32 @@
   {
     "task": 145,
     "start": 32,
-    "machine": 3,
+    "machine": 2,
     "operator": 2
   },
   {
     "task": 146,
     "start": 23,
-    "machine": 6,
-    "operator": 5
+    "machine": 5,
+    "operator": 4
   },
   {
     "task": 147,
     "start": 2,
-    "machine": 7,
-    "operator": 7
+    "machine": 10,
+    "operator": 8
   },
   {
     "task": 148,
     "start": 7,
-    "machine": 12,
-    "operator": 12
+    "machine": 14,
+    "operator": 11
   },
   {
     "task": 149,
     "start": 47,
-    "machine": 18,
-    "operator": 18
+    "machine": 16,
+    "operator": 20
   },
   {
     "task": 150,
@@ -908,26 +908,26 @@
   {
     "task": 152,
     "start": 8,
-    "machine": 4,
-    "operator": 4
+    "machine": 6,
+    "operator": 6
   },
   {
     "task": 153,
     "start": 14,
-    "machine": 8,
-    "operator": 7
+    "machine": 7,
+    "operator": 8
   },
   {
     "task": 154,
     "start": 10,
-    "machine": 12,
-    "operator": 11
+    "machine": 11,
+    "operator": 15
   },
   {
     "task": 155,
     "start": 9,
     "machine": 17,
-    "operator": 17
+    "operator": 20
   },
   {
     "task": 156,
@@ -939,31 +939,31 @@
     "task": 157,
     "start": 26,
     "machine": 2,
-    "operator": 2
+    "operator": 3
   },
   {
     "task": 158,
     "start": 11,
     "machine": 5,
-    "operator": 5
+    "operator": 6
   },
   {
     "task": 159,
     "start": 66,
     "machine": 7,
-    "operator": 7
+    "operator": 9
   },
   {
     "task": 160,
     "start": 68,
-    "machine": 11,
-    "operator": 12
+    "machine": 15,
+    "operator": 13
   },
   {
     "task": 161,
     "start": 22,
-    "machine": 18,
-    "operator": 18
+    "machine": 19,
+    "operator": 19
   },
   {
     "task": 162,
@@ -975,31 +975,31 @@
     "task": 163,
     "start": 10,
     "machine": 2,
-    "operator": 2
+    "operator": 3
   },
   {
     "task": 164,
     "start": 32,
-    "machine": 4,
-    "operator": 4
+    "machine": 6,
+    "operator": 5
   },
   {
     "task": 165,
     "start": 60,
-    "machine": 7,
+    "machine": 10,
     "operator": 8
   },
   {
     "task": 166,
     "start": 20,
-    "machine": 12,
-    "operator": 11
+    "machine": 13,
+    "operator": 14
   },
   {
     "task": 167,
     "start": 63,
     "machine": 16,
-    "operator": 16
+    "operator": 18
   },
   {
     "task": 168,
@@ -1016,26 +1016,26 @@
   {
     "task": 170,
     "start": 62,
-    "machine": 4,
+    "machine": 6,
     "operator": 5
   },
   {
     "task": 171,
     "start": 13,
-    "machine": 7,
-    "operator": 8
+    "machine": 10,
+    "operator": 9
   },
   {
     "task": 172,
     "start": 21,
-    "machine": 13,
-    "operator": 13
+    "machine": 11,
+    "operator": 12
   },
   {
     "task": 173,
     "start": 21,
-    "machine": 16,
-    "operator": 16
+    "machine": 18,
+    "operator": 17
   },
   {
     "task": 174,
@@ -1046,32 +1046,32 @@
   {
     "task": 175,
     "start": 65,
-    "machine": 2,
+    "machine": 3,
     "operator": 2
   },
   {
     "task": 176,
     "start": 54,
-    "machine": 4,
-    "operator": 4
+    "machine": 6,
+    "operator": 5
   },
   {
     "task": 177,
     "start": 71,
-    "machine": 7,
+    "machine": 9,
     "operator": 7
   },
   {
     "task": 178,
     "start": 22,
     "machine": 12,
-    "operator": 11
+    "operator": 14
   },
   {
     "task": 179,
     "start": 69,
-    "machine": 16,
-    "operator": 16
+    "machine": 20,
+    "operator": 17
   },
   {
     "task": 180,
@@ -1082,32 +1082,32 @@
   {
     "task": 181,
     "start": 16,
-    "machine": 2,
+    "machine": 3,
     "operator": 2
   },
   {
     "task": 182,
-    "start": 41,
-    "machine": 6,
-    "operator": 6
+    "start": 35,
+    "machine": 5,
+    "operator": 4
   },
   {
     "task": 183,
     "start": 25,
-    "machine": 8,
+    "machine": 9,
     "operator": 8
   },
   {
     "task": 184,
     "start": 56,
-    "machine": 11,
+    "machine": 14,
     "operator": 11
   },
   {
     "task": 185,
     "start": 37,
-    "machine": 16,
-    "operator": 16
+    "machine": 18,
+    "operator": 20
   },
   {
     "task": 186,
@@ -1118,32 +1118,32 @@
   {
     "task": 187,
     "start": 37,
-    "machine": 3,
+    "machine": 2,
     "operator": 3
   },
   {
     "task": 188,
     "start": 12,
-    "machine": 5,
-    "operator": 5
+    "machine": 4,
+    "operator": 6
   },
   {
     "task": 189,
     "start": 11,
-    "machine": 7,
-    "operator": 9
+    "machine": 8,
+    "operator": 7
   },
   {
     "task": 190,
     "start": 67,
-    "machine": 12,
-    "operator": 11
+    "machine": 13,
+    "operator": 14
   },
   {
     "task": 191,
     "start": 39,
     "machine": 17,
-    "operator": 17
+    "operator": 19
   },
   {
     "task": 192,
@@ -1153,33 +1153,33 @@
   },
   {
     "task": 193,
-    "start": 59,
-    "machine": 3,
-    "operator": 3
+    "start": 60,
+    "machine": 2,
+    "operator": 2
   },
   {
     "task": 194,
     "start": 34,
-    "machine": 5,
-    "operator": 6
+    "machine": 4,
+    "operator": 5
   },
   {
     "task": 195,
     "start": 25,
-    "machine": 7,
-    "operator": 7
+    "machine": 8,
+    "operator": 10
   },
   {
     "task": 196,
-    "start": 12,
+    "start": 11,
     "machine": 13,
-    "operator": 13
+    "operator": 12
   },
   {
     "task": 197,
     "start": 12,
-    "machine": 16,
-    "operator": 16
+    "machine": 20,
+    "operator": 17
   },
   {
     "task": 198,
@@ -1190,32 +1190,32 @@
   {
     "task": 199,
     "start": 3,
-    "machine": 2,
+    "machine": 3,
     "operator": 2
   },
   {
     "task": 200,
     "start": 71,
-    "machine": 4,
-    "operator": 4
+    "machine": 6,
+    "operator": 5
   },
   {
     "task": 201,
-    "start": 19,
+    "start": 18,
     "machine": 9,
-    "operator": 9
+    "operator": 7
   },
   {
     "task": 202,
     "start": 6,
     "machine": 11,
-    "operator": 11
+    "operator": 12
   },
   {
     "task": 203,
     "start": 35,
-    "machine": 17,
-    "operator": 18
+    "machine": 18,
+    "operator": 16
   },
   {
     "task": 204,
@@ -1232,26 +1232,26 @@
   {
     "task": 206,
     "start": 16,
-    "machine": 5,
+    "machine": 6,
     "operator": 5
   },
   {
     "task": 207,
     "start": 49,
-    "machine": 9,
-    "operator": 9
+    "machine": 8,
+    "operator": 8
   },
   {
     "task": 208,
     "start": 12,
-    "machine": 14,
-    "operator": 14
+    "machine": 11,
+    "operator": 12
   },
   {
     "task": 209,
     "start": 15,
-    "machine": 16,
-    "operator": 16
+    "machine": 20,
+    "operator": 20
   },
   {
     "task": 210,
@@ -1262,32 +1262,32 @@
   {
     "task": 211,
     "start": 40,
-    "machine": 3,
+    "machine": 2,
     "operator": 3
   },
   {
     "task": 212,
     "start": 24,
     "machine": 4,
-    "operator": 4
+    "operator": 5
   },
   {
     "task": 213,
     "start": 49,
     "machine": 7,
-    "operator": 7
+    "operator": 10
   },
   {
     "task": 214,
     "start": 10,
-    "machine": 13,
-    "operator": 14
+    "machine": 12,
+    "operator": 11
   },
   {
     "task": 215,
     "start": 50,
-    "machine": 16,
-    "operator": 16
+    "machine": 18,
+    "operator": 19
   },
   {
     "task": 216,
@@ -1297,33 +1297,33 @@
   },
   {
     "task": 217,
-    "start": 13,
-    "machine": 2,
-    "operator": 2
+    "start": 12,
+    "machine": 3,
+    "operator": 3
   },
   {
     "task": 218,
     "start": 18,
-    "machine": 4,
+    "machine": 5,
     "operator": 4
   },
   {
     "task": 219,
     "start": 7,
-    "machine": 7,
-    "operator": 7
+    "machine": 8,
+    "operator": 10
   },
   {
     "task": 220,
     "start": 20,
-    "machine": 11,
-    "operator": 12
+    "machine": 15,
+    "operator": 15
   },
   {
     "task": 221,
     "start": 30,
-    "machine": 19,
-    "operator": 19
+    "machine": 20,
+    "operator": 17
   },
   {
     "task": 222,
@@ -1335,31 +1335,31 @@
     "task": 223,
     "start": 73,
     "machine": 2,
-    "operator": 2
+    "operator": 3
   },
   {
     "task": 224,
     "start": 38,
-    "machine": 5,
-    "operator": 5
+    "machine": 6,
+    "operator": 4
   },
   {
     "task": 225,
     "start": 64,
-    "machine": 7,
-    "operator": 7
+    "machine": 10,
+    "operator": 9
   },
   {
     "task": 226,
     "start": 30,
-    "machine": 11,
-    "operator": 11
+    "machine": 15,
+    "operator": 15
   },
   {
     "task": 227,
     "start": 42,
-    "machine": 17,
-    "operator": 17
+    "machine": 20,
+    "operator": 16
   },
   {
     "task": 228,
@@ -1369,33 +1369,33 @@
   },
   {
     "task": 229,
-    "start": 72,
+    "start": 65,
     "machine": 2,
-    "operator": 2
+    "operator": 3
   },
   {
     "task": 230,
     "start": 59,
-    "machine": 4,
-    "operator": 4
+    "machine": 6,
+    "operator": 6
   },
   {
     "task": 231,
     "start": 32,
-    "machine": 7,
+    "machine": 10,
     "operator": 8
   },
   {
     "task": 232,
     "start": 51,
-    "machine": 11,
-    "operator": 11
+    "machine": 15,
+    "operator": 14
   },
   {
     "task": 233,
     "start": 19,
-    "machine": 18,
-    "operator": 19
+    "machine": 19,
+    "operator": 16
   },
   {
     "task": 234,
@@ -1406,14 +1406,14 @@
   {
     "task": 235,
     "start": 72,
-    "machine": 3,
+    "machine": 2,
     "operator": 3
   },
   {
     "task": 236,
     "start": 20,
-    "machine": 4,
-    "operator": 6
+    "machine": 6,
+    "operator": 5
   },
   {
     "task": 237,
@@ -1430,8 +1430,8 @@
   {
     "task": 239,
     "start": 75,
-    "machine": 16,
-    "operator": 16
+    "machine": 20,
+    "operator": 20
   },
   {
     "task": 240,
@@ -1442,8 +1442,8 @@
   {
     "task": 241,
     "start": 24,
-    "machine": 2,
-    "operator": 2
+    "machine": 3,
+    "operator": 3
   },
   {
     "task": 242,
@@ -1454,20 +1454,20 @@
   {
     "task": 243,
     "start": 44,
-    "machine": 7,
-    "operator": 7
+    "machine": 8,
+    "operator": 10
   },
   {
     "task": 244,
     "start": 12,
-    "machine": 15,
-    "operator": 15
+    "machine": 13,
+    "operator": 11
   },
   {
     "task": 245,
     "start": 14,
-    "machine": 18,
-    "operator": 18
+    "machine": 17,
+    "operator": 19
   },
   {
     "task": 246,
@@ -1485,25 +1485,25 @@
     "task": 248,
     "start": 39,
     "machine": 4,
-    "operator": 4
+    "operator": 6
   },
   {
     "task": 249,
     "start": 37,
-    "machine": 8,
+    "machine": 10,
     "operator": 7
   },
   {
     "task": 250,
     "start": 4,
-    "machine": 11,
-    "operator": 12
+    "machine": 12,
+    "operator": 13
   },
   {
     "task": 251,
     "start": 35,
     "machine": 16,
-    "operator": 16
+    "operator": 19
   },
   {
     "task": 252,
@@ -1515,31 +1515,31 @@
     "task": 253,
     "start": 62,
     "machine": 2,
-    "operator": 2
+    "operator": 3
   },
   {
     "task": 254,
-    "start": 41,
-    "machine": 5,
-    "operator": 4
+    "start": 42,
+    "machine": 4,
+    "operator": 5
   },
   {
     "task": 255,
     "start": 47,
     "machine": 7,
-    "operator": 7
+    "operator": 10
   },
   {
     "task": 256,
     "start": 27,
-    "machine": 15,
-    "operator": 15
+    "machine": 12,
+    "operator": 14
   },
   {
     "task": 257,
     "start": 29,
-    "machine": 17,
-    "operator": 17
+    "machine": 18,
+    "operator": 16
   },
   {
     "task": 258,
@@ -1550,31 +1550,31 @@
   {
     "task": 259,
     "start": 59,
-    "machine": 2,
+    "machine": 3,
     "operator": 2
   },
   {
     "task": 260,
     "start": 60,
-    "machine": 4,
+    "machine": 5,
     "operator": 4
   },
   {
     "task": 261,
     "start": 22,
-    "machine": 7,
-    "operator": 7
+    "machine": 10,
+    "operator": 8
   },
   {
     "task": 262,
     "start": 38,
     "machine": 12,
-    "operator": 11
+    "operator": 13
   },
   {
     "task": 263,
     "start": 5,
-    "machine": 18,
+    "machine": 17,
     "operator": 18
   },
   {
@@ -1592,24 +1592,24 @@
   {
     "task": 266,
     "start": 26,
-    "machine": 4,
+    "machine": 6,
     "operator": 6
   },
   {
     "task": 267,
     "start": 49,
-    "machine": 8,
-    "operator": 8
+    "machine": 10,
+    "operator": 7
   },
   {
     "task": 268,
     "start": 27,
-    "machine": 11,
-    "operator": 12
+    "machine": 14,
+    "operator": 13
   },
   {
     "task": 269,
-    "start": 26,
+    "start": 37,
     "machine": 17,
     "operator": 17
   },
@@ -1627,26 +1627,26 @@
   },
   {
     "task": 272,
-    "start": 26,
-    "machine": 6,
-    "operator": 5
+    "start": 25,
+    "machine": 5,
+    "operator": 4
   },
   {
     "task": 273,
-    "start": 27,
-    "machine": 7,
+    "start": 26,
+    "machine": 10,
     "operator": 7
   },
   {
     "task": 274,
     "start": 40,
-    "machine": 11,
-    "operator": 12
+    "machine": 15,
+    "operator": 15
   },
   {
     "task": 275,
     "start": 74,
-    "machine": 17,
+    "machine": 18,
     "operator": 18
   },
   {
@@ -1659,31 +1659,31 @@
     "task": 277,
     "start": 26,
     "machine": 3,
-    "operator": 3
+    "operator": 2
   },
   {
     "task": 278,
     "start": 80,
-    "machine": 4,
-    "operator": 4
+    "machine": 6,
+    "operator": 5
   },
   {
     "task": 279,
     "start": 78,
-    "machine": 7,
-    "operator": 7
+    "machine": 8,
+    "operator": 9
   },
   {
     "task": 280,
     "start": 27,
-    "machine": 12,
-    "operator": 11
+    "machine": 13,
+    "operator": 12
   },
   {
     "task": 281,
     "start": 29,
     "machine": 16,
-    "operator": 16
+    "operator": 19
   },
   {
     "task": 282,
@@ -1694,19 +1694,19 @@
   {
     "task": 283,
     "start": 33,
-    "machine": 2,
+    "machine": 3,
     "operator": 3
   },
   {
     "task": 284,
     "start": 42,
-    "machine": 4,
-    "operator": 5
+    "machine": 6,
+    "operator": 4
   },
   {
     "task": 285,
     "start": 30,
-    "machine": 7,
+    "machine": 8,
     "operator": 7
   },
   {
@@ -1718,8 +1718,8 @@
   {
     "task": 287,
     "start": 76,
-    "machine": 16,
-    "operator": 16
+    "machine": 18,
+    "operator": 18
   },
   {
     "task": 288,
@@ -1729,33 +1729,33 @@
   },
   {
     "task": 289,
-    "start": 52,
+    "start": 53,
     "machine": 3,
-    "operator": 3
+    "operator": 2
   },
   {
     "task": 290,
     "start": 65,
-    "machine": 4,
-    "operator": 4
+    "machine": 5,
+    "operator": 6
   },
   {
     "task": 291,
-    "start": 43,
-    "machine": 8,
-    "operator": 8
+    "start": 37,
+    "machine": 7,
+    "operator": 10
   },
   {
     "task": 292,
     "start": 58,
-    "machine": 12,
-    "operator": 11
+    "machine": 13,
+    "operator": 15
   },
   {
     "task": 293,
     "start": 48,
-    "machine": 17,
-    "operator": 17
+    "machine": 19,
+    "operator": 19
   },
   {
     "task": 294,
@@ -1767,31 +1767,31 @@
     "task": 295,
     "start": 7,
     "machine": 2,
-    "operator": 2
+    "operator": 3
   },
   {
     "task": 296,
     "start": 67,
     "machine": 4,
-    "operator": 4
+    "operator": 6
   },
   {
     "task": 297,
     "start": 39,
-    "machine": 8,
+    "machine": 9,
     "operator": 7
   },
   {
     "task": 298,
     "start": 17,
-    "machine": 12,
-    "operator": 12
+    "machine": 15,
+    "operator": 14
   },
   {
     "task": 299,
     "start": 8,
-    "machine": 16,
-    "operator": 16
+    "machine": 19,
+    "operator": 18
   },
   {
     "task": 300,
