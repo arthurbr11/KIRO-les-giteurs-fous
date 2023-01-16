@@ -100,7 +100,7 @@ def create_solution_glouton_sort_date(type_data):
     Tasks_date_job, S_associate = [[i, 0, -1] for i in range(I)], [0] * I,
     for j in range(J):
         for k, i in enumerate(S[j]):
-            Tasks_date_job[i][2] = w[j]
+            Tasks_date_job[i][2] = 0.7*M_space[i].count(0) + 0.1*sum(len(O_space_2d[i][m]) for m in range(M))
             if k == 0:
                 Tasks_date_job[i][1] = r[i]
             else:
