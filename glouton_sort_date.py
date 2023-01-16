@@ -2,11 +2,13 @@ import numpy as np
 import bisect
 import collections
 import time
+import functools
 
 import extract_data
 import tools_json
 import analysis_sol
 from pprint import pprint
+
 
 def not_intersect(creneau, list_creneau_taken):
     for c in list_creneau_taken:
@@ -70,6 +72,20 @@ def start_for_task(o, m, i, r, Mtm, Oto, p):
             return max(start, list_creneau_taken_for_o[-1][1], list_creneau_taken_for_m[-1][1])
 
 
+def compare(task_date_job1, task_date_job2):
+    task1, date1, weight_job1 = task_date_job1
+    task2, date2, weight_job2 = task_date_job2
+    if date1 < date2:
+        return -1
+    elif date1 > date2:
+        return +1
+    else:
+        if weight_job1 >= weight_job2:
+            return -1
+        else:
+            return +1
+
+
 def create_solution_glouton_sort_date(type_data):
     J, I, M, O, alpha, beta, S, r, d, w, p, M_space, O_space_3d, O_space_2d = extract_data.return_all_parameters(
         type_data)
@@ -81,20 +97,27 @@ def create_solution_glouton_sort_date(type_data):
     Oto = []
     for o in range(O):
         Oto.append([])
-    Tasks,date,S_associate=[i for i in range(I)],[0]*I,[0]*I
+    Tasks_date_job, S_associate = [[i, 0, -1] for i in range(I)], [0] * I,
     for j in range(J):
-        for k,i in enumerate(S[j]):
-            date[i]=r[j]+sum(p[l] for l in S[j][0:k])
-            S_associate[i]=S[j].copy()
-    Tasks=sorted(Tasks,key=lambda task: date[task])
-    date=sorted(date)
-    sort_s_associate=[0]*I
-    for i in range(I):
-        sort_s_associate[i]=S_associate[Tasks[i]]
+        for k, i in enumerate(S[j]):
+            Tasks_date_job[i][2] = O_space_2d[i].count(1)
+            if k == 0:
+                Tasks_date_job[i][1] = r[i]
+            else:
+                Tasks_date_job[i][1] = Tasks_date_job[S[j][k - 1]][1] + p[S[j][k - 1]]
+            S_associate[i] = S[j].copy()
 
-    for k,task in enumerate(Tasks):
-        if task==13 or task==17:
-            d=0
+    Tasks_date_job_sort = sorted(Tasks_date_job, key=functools.cmp_to_key(compare))
+    Tasks, date = [0] * I, [0] * I
+    sort_s_associate = [0] * I
+    Table_coresp = [0] * I
+    for i in range(I):
+        Tasks[i]=Tasks_date_job_sort[i][0]
+        date[i]=Tasks_date_job_sort[i][1]
+        sort_s_associate[i] = S_associate[Tasks[i]]
+        Table_coresp[Tasks[i]] = i
+
+    for k, task in enumerate(Tasks):
         possibilities = operator_machine_for_task(task, O_space_2d)
         start_date_possibilities = []
         start = np.inf
@@ -104,8 +127,15 @@ def create_solution_glouton_sort_date(type_data):
             if start > start_date_possibilities[-1]:
                 start = start_date_possibilities[-1]
                 o_start, m_start = o, m
-        for task_same_job in sort_s_associate[k]:
-            date[task_same_job] =max(start + p[task],date[task_same_job])
+        c = False
+        index = 0
+        for l, task_same_job in enumerate(sort_s_associate[k]):
+            if task_same_job == task:
+                c = True
+                index = l
+                date[k] = start
+            if c:
+                date[Table_coresp[task_same_job]] = start + sum(p[i] for i in sort_s_associate[k][index:l])
         Bi[task], Oi[task], Mi[task] = start, o_start, m_start
         bisect.insort(Mtm[m_start], [start, start + p[task]])
         bisect.insort(Oto[o_start], [start, start + p[task]])
@@ -113,18 +143,21 @@ def create_solution_glouton_sort_date(type_data):
 
 
 INSTANCE = {'tiny': analysis_sol.read_instance('Instances/KIRO-tiny.json'),
-                  'small': analysis_sol.read_instance('Instances/KIRO-small.json'),
-                  'medium': analysis_sol.read_instance('Instances/KIRO-medium.json'),
-                  'large': analysis_sol.read_instance('Instances/KIRO-large.json')}
+            'small': analysis_sol.read_instance('Instances/KIRO-small.json'),
+            'medium': analysis_sol.read_instance('Instances/KIRO-medium.json'),
+            'large': analysis_sol.read_instance('Instances/KIRO-large.json')}
 SOL_GLOUTON_SORT = {'tiny': create_solution_glouton_sort_date('tiny'),
-                     'small': create_solution_glouton_sort_date('small'),
-                     'medium': create_solution_glouton_sort_date('medium'),
-                     'large': create_solution_glouton_sort_date('large')}
+                    'small': create_solution_glouton_sort_date('small'),
+                    'medium': create_solution_glouton_sort_date('medium'),
+                    'large': create_solution_glouton_sort_date('large')}
 type_data = ['tiny', 'small', 'medium', 'large']
+path = ['SOL/glouton_sort_date/KIRO-tiny-sol_11.json', 'SOL/glouton_sort_date/KIRO-small-sol_11.json',
+        'SOL/glouton_sort_date/KIRO-medium-sol_11.json', 'SOL/glouton_sort_date/KIRO-large-sol_11.json']
 if __name__ == "__main__":
     for k in range(4):
-        tools_json.solution_create_field(SOL_GLOUTON_SORT[type_data[k]], f'glouton_sort_date/KIRO-{type_data[k]}')
-        print(analysis_sol.is_feasible(SOL_GLOUTON_SORT[type_data[k]],INSTANCE[type_data[k]]))
+        if analysis_sol.cost(SOL_GLOUTON_SORT[type_data[k]], INSTANCE[type_data[k]])<analysis_sol.cost(analysis_sol.read_solution(path[k]),INSTANCE[type_data[k]]):
+            tools_json.solution_create_field(SOL_GLOUTON_SORT[type_data[k]], f'glouton_sort_date/KIRO-{type_data[k]}')
+        print(analysis_sol.is_feasible(SOL_GLOUTON_SORT[type_data[k]], INSTANCE[type_data[k]]))
 
     COST_GLOUTON_SORT = {i: analysis_sol.cost(SOL_GLOUTON_SORT[i], INSTANCE[i]) for i in SOL_GLOUTON_SORT.keys()}
     COST_TOTAL_GLOUTON_SORT = sum(COST_GLOUTON_SORT[i] for i in COST_GLOUTON_SORT.keys())
